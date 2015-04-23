@@ -1,1 +1,0 @@
-javac -cp jxl.jar JExcelAPIDemo.java
