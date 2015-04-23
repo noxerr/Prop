@@ -6,6 +6,8 @@
 
 package dominio.controlador;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -14,16 +16,16 @@ package dominio.controlador;
 public class CtrlEstadistica {
     public static Object[] cargarEstadistica(){
         Object pair[] = new Object[2];
-        int[] listaSizes = new int[3];
-        double[] listaTimes = new double[3];
+        ArrayList[] listaSizes = new ArrayList[3];
+        ArrayList[] listaTimes = new ArrayList[3];
         pair[0] = listaSizes;
         pair[1] = listaTimes;
         return pair;
     }
     
     public static void actualizarEstadistica(Object[] ob){
-        int[] sizes = (int[]) ob[0];
-        double[] times = (double[]) ob[1];
+        ArrayList[] sizes = (ArrayList[]) ob[0];
+        ArrayList[] times = (ArrayList[]) ob[1];
     }
 
 }
