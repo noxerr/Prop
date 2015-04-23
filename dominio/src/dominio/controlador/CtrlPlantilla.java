@@ -37,12 +37,13 @@ public class CtrlPlantilla {
     
     public static void guardarPlantilla(Object[] ob){
         //llamar a la capa de persistencia que guarde la plantilla que nos han pasado
-        Map<String, Integer> mapa = new HashMap<String,Integer>();
+        Map<String, Integer> mapa;
         mapa = (Map)ob[1];
-        for (String clave : mapa.keySet()) {   
+        String name = (String) ob[0];
+        /*for (String clave : mapa.keySet()) {   
             Integer valor = mapa.get(clave);
-            //System.out.println("Clave: " + clave + ": " + valor);
-        }
+            System.out.println("Clave: " + clave + ": " + valor);
+        }*/
     }
     
     public static String[] cargarListaPlantillas(){

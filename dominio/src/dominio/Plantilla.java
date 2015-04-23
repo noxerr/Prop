@@ -120,7 +120,7 @@ public class Plantilla {
         return retorno;        
         //PARA OBTENER EL RESULTADO, CREAIS OTRO OBJECT COMO LA 1A LINEA DE LA FUNCION
         //LO IGUALAIS A GETPOND Y LUEGO HACEIS STRING NOMBRE = (STRING) OBJECTO[0] Y
-        //MAP ... TAL = NEW HASHMAP TAL.. ; TAL = (MAP<TAL,TAL>) OBJETO[1]
+        //MAP ... TAL = NEW HASHMAP TAL.. ; TAL = (MAP<TAL,TAL>) OBJETO[1].
     }
     
     
