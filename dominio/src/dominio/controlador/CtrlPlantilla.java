@@ -29,7 +29,7 @@ public class CtrlPlantilla {
         lista[4] = 2;
         lista[5] = 4;
         lista[6] = 8;
-        lista[7] = 3;
+        lista[7] = 3; 
         lista[8] = 13;
         //int[] lista = null;
         return lista;
