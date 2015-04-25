@@ -91,11 +91,20 @@ public class Plantilla {
         Object[] a = getPond();
         Map<String,Integer> mapa = (Map) a[1];
         int i = 0;
-        for (String clave : mapa.keySet()) {   
+        /*for (String clave : mapa.keySet()) {   
             int valor = mapa.get(clave);
             total += (valor*lista[i]);
             if (i<9)i++; //para evitar errores
-        }
+        }*/
+        total += (lista[0] * mapa.get("votacioEq"));
+        total += (lista[1] * mapa.get("votacioDif"));
+        total += (lista[2] * mapa.get("reunio"));
+        total += (lista[3] * mapa.get("conferencia"));
+        total += (lista[4] * mapa.get("dinar"));
+        total += (lista[5] * mapa.get("lleure"));
+        total += (lista[6] * mapa.get("partit"));
+        total += (lista[7] * mapa.get("edat"));
+        total += (lista[8] * mapa.get("religio"));
         
         return total;
     }

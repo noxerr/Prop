@@ -28,10 +28,26 @@ public class DriverPlantilla {
             CtrlPlantilla.modNom("nueva");
         }
         catch(Exception e){
-            e.printStackTrace();
-            //System.out.println("No puede repetir el nombre default");
+            //e.printStackTrace();
+            System.out.println("No puede repetir el nombre default");
+            //System.exit(17);
             //return;
         }
+        System.out.println("\nmuletilla 1");
+        
+        CtrlPlantilla.crearPlantilla("nueva");
+        System.out.println("muletilla 2");
+        
+        try{
+            CtrlPlantilla.modNom("Primera");
+        }
+        catch(Exception e){
+            //e.printStackTrace();
+            System.out.println("No puede repetir el nombre default");
+            //System.exit(17);
+            //return;
+        }
+        
         int[] listaPond = new int[9];
         for (int i = 0; i<9; i++){
             listaPond[i] = i;
@@ -40,12 +56,15 @@ public class DriverPlantilla {
         ob = CtrlPlantilla.getPond();
         ret = (String) ob[0];
         mapa = (Map) ob[1];
-        System.err.println("Valores modificados: nom - " + ret + ".\n");
+        System.out.println("Valores modificados: nom - " + ret + ".\n");
         for (String clave : mapa.keySet()) {   
             Integer valor = mapa.get(clave);
             System.out.println("Clave: " + clave + ": " + valor);
         }
         
-        
+        int retur = CtrlPlantilla.calculAfinitat(listaPond);
+        //deberia dar 204 (0*0 + 1*1 + 2*2 + 3*3.. +8*8 xk las ponderaciones las he puesto
+        //de 0 a 8 y las coincidencias de eventos tambien
+        System.out.println("La afinitat dels dos diputats es de: " + retur);
     }
 }

@@ -18,6 +18,11 @@ import java.util.Map;
  */
 public class CtrlPlantilla {
     private static Plantilla plantilla = new Plantilla("Default");
+    //private static Exception exc = new Exception("No se puede modificar la plantilla default");
+    
+    public static void crearPlantilla(String nom){
+        plantilla = new Plantilla(nom);
+    }
     
     
     public static void cargarPlantilla(String nom) throws FileNotFoundException{
@@ -48,8 +53,8 @@ public class CtrlPlantilla {
     }
     
     public static void guardarPlantilla() throws Exception{
-        Exception exc2 = new Exception("No se puede guardar la plantilla por defecto");
-        if ("default".equalsIgnoreCase(plantilla.getNom())) throw exc2;
+        if ("default".equalsIgnoreCase(plantilla.getNom())) throw new Exception("No se puede guardar la plantilla por defecto");
+        //comprobar si existe el nombre---else if (nom.equals(plantilla.getNom())) throw new Exception("Ja hi ha una plantilla amb aquest nom");
         else {
             Object[] ob;
             ob = getPond();
@@ -79,8 +84,8 @@ public class CtrlPlantilla {
     }
     
     public static void modAll(int[] listaPond) throws Exception{
-        Exception exc = new Exception("No se puede modificar la plantilla default");
-        if ("default".equalsIgnoreCase(plantilla.getNom())) throw exc;
+        //Exception exc = new Exception("No se puede modificar la plantilla default");
+        if ("default".equalsIgnoreCase(plantilla.getNom())) throw new Exception("No se puede modificar la plantilla default");
         else {
             plantilla.modpVotacio(listaPond[0]);
             plantilla.modpVotacioDif(listaPond[1]);
@@ -95,10 +100,8 @@ public class CtrlPlantilla {
     }
     
     public static void modNom(String nom) throws Exception{
-        Exception exc = new Exception("No se puede modificar la plantilla default");
-        Exception ex3 = new Exception("Ja hi ha una plantilla amb aquest nom");
-        if ("default".equalsIgnoreCase(plantilla.getNom())) throw exc;
-        else if (nom.equals(plantilla.getNom())) throw ex3;
-        else plantilla.modNom(nom);
+        if ("default".equalsIgnoreCase(plantilla.getNom())) throw new Exception("No se puede modificar la plantilla default");
+        else plantilla.modNom(nom);        
     }
+    
 }
