@@ -4,7 +4,6 @@ package dominio;
 
 import java.util.HashMap;
 import java.util.Map;
-import dominio.controlador.CtrlPlantilla;
 
 /**
  *
@@ -129,23 +128,8 @@ public class Plantilla {
         //MAP ... TAL = NEW HASHMAP TAL.. ; TAL = (MAP<TAL,TAL>) OBJETO[1].
     }
     
-    
-    
-    public void guardarPlantilla(){
-        Object[] ob;
-        ob = getPond();
-        CtrlPlantilla.guardarPlantilla(ob);
-    }
-
-    public static void main(String[] args) {
-        Plantilla p = new Plantilla("pepito");
-        p.guardarPlantilla();
-        int[] lista = new int[9];
-        for (int i = 0; i <9; i++){
-            lista[i] = i;
-        }
-        int total = p.calculAfinitat(lista);
-        System.out.println("Total: " + total);
+    public String getNom(){
+        return this.nom;
     }
     
 }

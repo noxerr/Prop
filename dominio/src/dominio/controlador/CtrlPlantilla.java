@@ -7,6 +7,7 @@
 package dominio.controlador;
 
 import dominio.Plantilla;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,17 +18,12 @@ import java.util.Map;
  */
 public class CtrlPlantilla {
     private static Plantilla plantilla;
+    private final static Exception exc = new Exception("No se puede modificar la plantilla default");
     
-    public static void cargarPlantilla(String nom){
+    public static void cargarPlantilla(String nom) throws FileNotFoundException{
         int[] nueva = new int[9];
-        nueva[0] = 7;
-        nueva[1] = 9;
-        nueva[2] = 0;
-        nueva[3] = 1;
-        nueva[4] = 2;
-        nueva[5] = 4;
-        nueva[6] = 8;
-        nueva[7] = 3; 
+        nueva[0] = 7; nueva[1] = 9; nueva[2] = 0; nueva[3] = 1;
+        nueva[4] = 2; nueva[5] = 4; nueva[6] = 8; nueva[7] = 3; 
         nueva[8] = 13;
         //int[] nueva = CtrlPersistencia.cargarPlantilla(nom);
         try {
@@ -51,14 +47,18 @@ public class CtrlPlantilla {
         
     }
     
-    public static void guardarPlantilla(){
-        Object[] ob;
-        ob = getPond();
+    public static void guardarPlantilla() throws Exception{
+        Exception exc2 = new Exception("No se puede guardar la plantilla por defecto");
+        if ("default".equals(plantilla.getNom())) throw exc2;
+        else {
+            Object[] ob;
+            ob = getPond();
+            //CtrlPersistencia.guardarPlantilla(ob);
+        }
         /*for (String clave : mapa.keySet()) {   
             Integer valor = mapa.get(clave);
             System.out.println("Clave: " + clave + ": " + valor);
         }*/
-        //CtrlPersistencia.guardarPlantilla(ob);
     }
     
     public static String[] cargarListaPlantillas(){
@@ -76,5 +76,25 @@ public class CtrlPlantilla {
     public static Object[] getPond(){
         Object[] ret = plantilla.getPond();
         return ret;
+    }
+    
+    public static void modAll(int[] listaPond) throws Exception{
+        if ("default".equals(plantilla.getNom())) throw exc;
+        else {
+            plantilla.modpVotacio(listaPond[0]);
+            plantilla.modpVotacioDif(listaPond[1]);
+            plantilla.modpReunio(listaPond[2]);
+            plantilla.modpConf(listaPond[3]);
+            plantilla.modpDinar(listaPond[4]);
+            plantilla.modpLleure(listaPond[5]);
+            plantilla.modpPartit(listaPond[6]);
+            plantilla.modpEdat(listaPond[7]);
+            plantilla.modpReligio(listaPond[8]);
+        }
+    }
+    
+    public static void modNom(String nom) throws Exception{
+        if ("default".equals(plantilla.getNom())) throw exc;
+        else plantilla.modNom(nom);
     }
 }
