@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class CtrlPlantilla {
     private static Plantilla plantilla = new Plantilla("Default");
-    private final static Exception exc = new Exception("No se puede modificar la plantilla default");
+    
     
     public static void cargarPlantilla(String nom) throws FileNotFoundException{
         int[] nueva = new int[9];
@@ -79,6 +79,7 @@ public class CtrlPlantilla {
     }
     
     public static void modAll(int[] listaPond) throws Exception{
+        Exception exc = new Exception("No se puede modificar la plantilla default");
         if ("default".equalsIgnoreCase(plantilla.getNom())) throw exc;
         else {
             plantilla.modpVotacio(listaPond[0]);
@@ -94,6 +95,7 @@ public class CtrlPlantilla {
     }
     
     public static void modNom(String nom) throws Exception{
+        Exception exc = new Exception("No se puede modificar la plantilla default");
         Exception ex3 = new Exception("Ja hi ha una plantilla amb aquest nom");
         if ("default".equalsIgnoreCase(plantilla.getNom())) throw exc;
         else if (nom.equals(plantilla.getNom())) throw ex3;

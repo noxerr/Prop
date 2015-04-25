@@ -13,17 +13,12 @@ public class Plantilla {
 
     private String nom;
     private int votacioEq, votacioDif, reunio, conferencia, dinar, lleure, partit, edat, religio;
-    //private CtrlPlantilla control;
     
-    //para k lo kereis?
-    //Map<String, Double> Pair = new HashMap<String, Double>();
-
     // CREADORA
     // Pre: no hi ha cap plantilla amb nom “nom”
     // Post: crea una plantilla amb nom “nom”
     public Plantilla(String nom){
         this.nom = nom;
-        //control = new CtrlPlantilla();
     }
 
     // MODIFICADORA
