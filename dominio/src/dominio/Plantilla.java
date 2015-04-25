@@ -82,9 +82,15 @@ public class Plantilla {
     public void modpReligio(int p){
         this.religio = p;
     }
+    
+    // Pre: plantilla amb nom diferent de “default”
+    // Post: ara el nom de la plantilla val “nom”
+    public void modNom(String nom){
+        this.nom = nom;
+    }
 
     // CONSULTORA
-    //Pre: dip1 i dip2 existeixen i son diputats diferents
+    //Pre: la llista conte les coincidencies en cada event, entre dos diputats
     //Post: retorna l’afinitat entre dip1 i dip2
     public int calculAfinitat(int[] lista){
         int total = 0;
@@ -124,26 +130,6 @@ public class Plantilla {
     }
     
     
-    public void cargarPlantilla(){
-        int[] nueva = CtrlPlantilla.cargarPlantilla(this.nom);
-        try {
-            if (nueva == null) throw new Exception();
-            else {
-                System.out.println("Existe y se ha cargado satisfactoriamente");
-                modpVotacio(nueva[0]);
-                modpVotacioDif(nueva[1]);
-                modpReunio(nueva[2]);
-                modpConf(nueva[3]);
-                modpDinar(nueva[4]);
-                modpLleure(nueva[5]);
-                modpPartit(nueva[6]);
-                modpEdat(nueva[7]);
-                modpReligio(nueva[8]);
-            }
-        } catch (Exception e) {
-            System.out.println("No existe la plantilla");
-        }
-    }
     
     public void guardarPlantilla(){
         Object[] ob;
@@ -153,7 +139,6 @@ public class Plantilla {
 
     public static void main(String[] args) {
         Plantilla p = new Plantilla("pepito");
-        p.cargarPlantilla();
         p.guardarPlantilla();
         int[] lista = new int[9];
         for (int i = 0; i <9; i++){
