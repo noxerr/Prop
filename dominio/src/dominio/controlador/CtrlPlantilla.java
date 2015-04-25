@@ -17,7 +17,7 @@ import java.util.Map;
  * @author dani__000
  */
 public class CtrlPlantilla {
-    private static Plantilla plantilla;
+    private static Plantilla plantilla = new Plantilla("Default");
     private final static Exception exc = new Exception("No se puede modificar la plantilla default");
     
     public static void cargarPlantilla(String nom) throws FileNotFoundException{
@@ -49,7 +49,7 @@ public class CtrlPlantilla {
     
     public static void guardarPlantilla() throws Exception{
         Exception exc2 = new Exception("No se puede guardar la plantilla por defecto");
-        if ("default".equals(plantilla.getNom())) throw exc2;
+        if ("default".equalsIgnoreCase(plantilla.getNom())) throw exc2;
         else {
             Object[] ob;
             ob = getPond();
@@ -79,7 +79,7 @@ public class CtrlPlantilla {
     }
     
     public static void modAll(int[] listaPond) throws Exception{
-        if ("default".equals(plantilla.getNom())) throw exc;
+        if ("default".equalsIgnoreCase(plantilla.getNom())) throw exc;
         else {
             plantilla.modpVotacio(listaPond[0]);
             plantilla.modpVotacioDif(listaPond[1]);
@@ -94,7 +94,9 @@ public class CtrlPlantilla {
     }
     
     public static void modNom(String nom) throws Exception{
-        if ("default".equals(plantilla.getNom())) throw exc;
+        Exception ex3 = new Exception("Ja hi ha una plantilla amb aquest nom");
+        if ("default".equalsIgnoreCase(plantilla.getNom())) throw exc;
+        else if (nom.equals(plantilla.getNom())) throw ex3;
         else plantilla.modNom(nom);
     }
 }
