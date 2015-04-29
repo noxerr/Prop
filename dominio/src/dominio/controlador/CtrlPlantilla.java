@@ -84,6 +84,10 @@ public class CtrlPlantilla {
         return ret;
     }
     
+    public static ArrayList<String> mostrarListaPlantillas(){
+        return listaPlantillas;
+    }
+    
     //Pre: la llista conte les coincidencies en cada event, entre dos diputats
     //Post: retorna l’afinitat entre dip1 i dip2
     public static int calculAfinitat(int[] lista){
