@@ -8,6 +8,7 @@ package drivers;
 
 import dominio.controlador.CtrlPlantilla;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  *
@@ -43,7 +44,8 @@ public class DriverPlantilla {
         }
         catch(Exception e){
             //e.printStackTrace();
-            System.out.println("No puede repetir el nombre default");
+            System.out.println("No puede repetir el nombre default..");
+            e.printStackTrace();
             //System.exit(17);
             //return;
         }
@@ -66,5 +68,9 @@ public class DriverPlantilla {
         //deberia dar 204 (0*0 + 1*1 + 2*2 + 3*3.. +8*8 xk las ponderaciones las he puesto
         //de 0 a 8 y las coincidencias de eventos tambien
         System.out.println("La afinitat dels dos diputats es de: " + retur);
+        Scanner input = new Scanner(System.in);
+        while(true){
+            int a = input.nextInt();
+        }
     }
 }

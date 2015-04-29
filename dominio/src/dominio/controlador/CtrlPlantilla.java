@@ -8,8 +8,8 @@ package dominio.controlador;
 
 import dominio.Plantilla;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 
 /**
@@ -18,37 +18,48 @@ import java.util.Map;
  */
 public class CtrlPlantilla {
     private static Plantilla plantilla = new Plantilla("Default");
-    //private static Exception exc = new Exception("No se puede modificar la plantilla default");
+    private static ArrayList<String> listaPlantillas = cargarListaPlantillas();
+    private static ListIterator it = listaPlantillas.listIterator();
     
-    public static void crearPlantilla(String nom){
-        plantilla = new Plantilla(nom);
+    public static void crearPlantilla(String nom) throws Exception{
+        if (nom.equalsIgnoreCase("default")) throw new Exception("No puedes crear otra plantilla default.");
+        else if (listaPlantillas.contains(nom)) throw new Exception("Ya existe la plantilla "+ nom + ".");
+        else {
+            plantilla = new Plantilla(nom);
+            listaPlantillas.add(nom);
+        }
     }
     
+    public static void borrarPlantilla(String nom) throws FileNotFoundException{
+        if (!listaPlantillas.contains(nom)) throw new FileNotFoundException();
+        else {
+            listaPlantillas.remove(nom);
+            //borrar plantilla de disco   
+        }
+    }
     
     public static void cargarPlantilla(String nom) throws FileNotFoundException{
         int[] nueva = new int[9];
         nueva[0] = 7; nueva[1] = 9; nueva[2] = 0; nueva[3] = 1;
         nueva[4] = 2; nueva[5] = 4; nueva[6] = 8; nueva[7] = 3; 
         nueva[8] = 13;
-        //int[] nueva = CtrlPersistencia.cargarPlantilla(nom);
-        try {
-            if (nueva == null) throw new Exception();
-            else {
-                System.out.println("Existe y se ha cargado satisfactoriamente");
-                plantilla.modpVotacio(nueva[0]);
-                plantilla.modpVotacioDif(nueva[1]);
-                plantilla.modpReunio(nueva[2]);
-                plantilla.modpConf(nueva[3]);
-                plantilla.modpDinar(nueva[4]);
-                plantilla.modpLleure(nueva[5]);
-                plantilla.modpPartit(nueva[6]);
-                plantilla.modpEdat(nueva[7]);
-                plantilla.modpReligio(nueva[8]);
-                plantilla.modNom(nom);
-            }
-        } catch (Exception e) {
-            System.out.println("No existe la plantilla");
+        //try int[] nueva = CtrlPersistencia.cargarPlantilla(nom);
+
+        if (!listaPlantillas.contains(nom)) throw new FileNotFoundException();
+        else {
+            //int[] nueva = CtrlPersistencia.cargarPlantilla(nom);
+            plantilla.modpVotacio(nueva[0]);
+            plantilla.modpVotacioDif(nueva[1]);
+            plantilla.modpReunio(nueva[2]);
+            plantilla.modpConf(nueva[3]);
+            plantilla.modpDinar(nueva[4]);
+            plantilla.modpLleure(nueva[5]);
+            plantilla.modpPartit(nueva[6]);
+            plantilla.modpEdat(nueva[7]);
+            plantilla.modpReligio(nueva[8]);
+            plantilla.modNom(nom);
         }
+
         
     }
     
@@ -66,8 +77,10 @@ public class CtrlPlantilla {
         }*/
     }
     
-    public static String[] cargarListaPlantillas(){
-        String[] ret = null;
+    public static ArrayList<String> cargarListaPlantillas(){
+        //HashSet<String> ret = new HashSet<>();
+        ArrayList<String> ret = new ArrayList<>();
+        //cargar de disco
         return ret;
     }
     
@@ -84,7 +97,6 @@ public class CtrlPlantilla {
     }
     
     public static void modAll(int[] listaPond) throws Exception{
-        //Exception exc = new Exception("No se puede modificar la plantilla default");
         if ("default".equalsIgnoreCase(plantilla.getNom())) throw new Exception("No se puede modificar la plantilla default");
         else {
             plantilla.modpVotacio(listaPond[0]);
@@ -100,8 +112,21 @@ public class CtrlPlantilla {
     }
     
     public static void modNom(String nom) throws Exception{
-        if ("default".equalsIgnoreCase(plantilla.getNom())) throw new Exception("No se puede modificar la plantilla default");
-        else plantilla.modNom(nom);        
+        if ("default".equalsIgnoreCase(plantilla.getNom())) throw new Exception("La plantilla default no se puede modificar");
+        else if (listaPlantillas.contains(nom)) throw new Exception("Ya existe la plantilla "+ nom + ".");
+        else {           
+            String aux;
+            if(!listaPlantillas.isEmpty()){
+                it = listaPlantillas.listIterator();
+                while (it.hasNext()){
+                    aux = (String) it.next();
+                    if (aux.equals(plantilla.getNom())) {
+                        it.set(nom);
+                    }
+                }
+            }
+            plantilla.modNom(nom);
+        }        
     }
     
 }
