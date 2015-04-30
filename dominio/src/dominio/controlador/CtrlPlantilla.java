@@ -8,8 +8,10 @@ package dominio.controlador;
 
 import dominio.Plantilla;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import persistencia.CtrlPersistenciaPlantilla;
 
 
 /**
@@ -20,34 +22,31 @@ public class CtrlPlantilla {
     private static Plantilla plantilla = new Plantilla("Default");
     private static ArrayList<String> listaPlantillas = cargarListaPlantillas();
     private static ListIterator it = listaPlantillas.listIterator();
+    private static String oldName;
     
-    public static void crearPlantilla(String nom) throws Exception{
+    public static void crearPlantilla(String nom) throws Exception, IOException{
         if (nom.equalsIgnoreCase("default")) throw new Exception("No puedes crear otra plantilla default.");
         else if (listaPlantillas.contains(nom)) throw new Exception("Ya existe la plantilla "+ nom + ".");
         else {
+            CtrlPersistenciaPlantilla.crearPlantilla(nom);
             plantilla = new Plantilla(nom);
             listaPlantillas.add(nom);
         }
     }
     
-    public static void borrarPlantilla(String nom) throws FileNotFoundException{
+    public static void borrarPlantilla(String nom) throws FileNotFoundException, Exception{
         if (!listaPlantillas.contains(nom)) throw new FileNotFoundException();
+        else if(nom.equalsIgnoreCase("default")) throw new Exception("La plantilla default no se puede borrar");
         else {
-            listaPlantillas.remove(nom);
-            //borrar plantilla de disco   
+            CtrlPersistenciaPlantilla.borrarPlantilla(nom);
+            listaPlantillas.remove(nom);  
         }
     }
     
-    public static void cargarPlantilla(String nom) throws FileNotFoundException{
-        int[] nueva = new int[9];
-        nueva[0] = 7; nueva[1] = 9; nueva[2] = 0; nueva[3] = 1;
-        nueva[4] = 2; nueva[5] = 4; nueva[6] = 8; nueva[7] = 3; 
-        nueva[8] = 13;
-        //try int[] nueva = CtrlPersistencia.cargarPlantilla(nom);
-
+    public static void cargarPlantilla(String nom) throws IOException, FileNotFoundException{
         if (!listaPlantillas.contains(nom)) throw new FileNotFoundException();
         else {
-            //int[] nueva = CtrlPersistencia.cargarPlantilla(nom);
+            int[] nueva = CtrlPersistenciaPlantilla.cargarPlantilla(nom);
             plantilla.modpVotacio(nueva[0]);
             plantilla.modpVotacioDif(nueva[1]);
             plantilla.modpReunio(nueva[2]);
@@ -63,13 +62,12 @@ public class CtrlPlantilla {
         
     }
     
-    public static void guardarPlantilla() throws Exception{
+    public static void guardarPlantilla() throws Exception, IOException{
         if ("default".equalsIgnoreCase(plantilla.getNom())) throw new Exception("No se puede guardar la plantilla por defecto");
-        //comprobar si existe el nombre---else if (nom.equals(plantilla.getNom())) throw new Exception("Ja hi ha una plantilla amb aquest nom");
         else {
             Object[] ob;
             ob = getPond();
-            //CtrlPersistencia.guardarPlantilla(ob);
+            CtrlPersistenciaPlantilla.guardarPlantilla(ob, oldName);
         }
         /*for (String clave : mapa.keySet()) {   
             Integer valor = mapa.get(clave);
@@ -79,8 +77,7 @@ public class CtrlPlantilla {
     
     public static ArrayList<String> cargarListaPlantillas(){
         //HashSet<String> ret = new HashSet<>();
-        ArrayList<String> ret = new ArrayList<>();
-        //cargar de disco
+        ArrayList<String> ret = CtrlPersistenciaPlantilla.cargarListaPlantillas();
         return ret;
     }
     
@@ -121,10 +118,11 @@ public class CtrlPlantilla {
         else {           
             String aux;
             if(!listaPlantillas.isEmpty()){
+                oldName = plantilla.getNom();
                 it = listaPlantillas.listIterator();
                 while (it.hasNext()){
                     aux = (String) it.next();
-                    if (aux.equals(plantilla.getNom())) {
+                    if (aux.equals(oldName)) {
                         it.set(nom);
                     }
                 }
