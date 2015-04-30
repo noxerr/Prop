@@ -8,6 +8,7 @@ package dominio;
 
 import dominio.controlador.CtrlEstadistica;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -15,8 +16,8 @@ import java.util.ArrayList;
  */
 public class Estadistica {
     
-    private ArrayList mida_girvan_newman, mida_clicke, mida_louvain;//integers
-    private ArrayList temps_g, temps_c, temps_s;//doubles
+    private ArrayList<Integer> mida_girvan_newman, mida_clicke, mida_louvain;//integers
+    private ArrayList<Integer> temps_g, temps_c, temps_s;//doubles
     
     //Pre: cert
     //Post: crea una estadistica
@@ -32,35 +33,61 @@ public class Estadistica {
     //Pre: cert
     //Post: entra la mida de la solució pels tres algorismes
     public void afegeix_mida_alg(int[] mida){
-        
+        mida_girvan_newman.add(mida[0]);
+        mida_clicke.add(mida[1]);
+        mida_louvain.add(mida[2]);
     }
 
     //Pre: cert
     //Post: entra els temps que es tarda en calcular la solució pels tres algorismes
-    public void afegeix_temps_alg(double[] g){
-        
+    public void afegeix_temps_alg(int[] g){
+        temps_g.add(g[0]);
+        temps_c.add(g[1]);
+        temps_s.add(g[2]);
     }
 
     //Pre: cert
     //Post: retorna la mitjana dels temps de girvan Newman guardats
     public int mitj_temps_GN(){
-        return 0;
+        Iterator it = temps_g.iterator();
+        int suma = 0;
+        int ret = 0;
+        while (it.hasNext()){
+            suma += (int) it.next();
+        }
+        ret = suma/(temps_g.size());
+        return ret;
     }
 
-    //Pre: cert
-    //Post: retorna la mitjana dels temps de louvain guardats
-    public int mitj_temps_Louvain(){
-        int a = 1;
-        return a; 
-    }
 
     //Pre: cert
     //Post: retorna la mitjana dels temps de clicke guardats
     public int mitj_temps_Clicke(){
-        return 0;
-        
+        Iterator it = temps_c.iterator();
+        int suma = 0;
+        int ret = 0;
+        while (it.hasNext()){
+            suma += (int) it.next();
+        }
+        ret = suma/(temps_g.size());
+        return ret;
     }
 
+    
+    //Pre: cert
+    //Post: retorna la mitjana dels temps de louvain guardats
+    public int mitj_temps_Louvain(){
+        Iterator it = temps_s.iterator();
+        int suma = 0;
+        int ret = 0;
+        while (it.hasNext()){
+            suma += (int) it.next();
+        }
+        ret = suma/(temps_g.size());
+        return ret;
+    }
+    
+    
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de girvan Newman guardats
     public int mitj_mida_GN(){
@@ -105,8 +132,8 @@ public class Estadistica {
     
     public Object[] convertToArray(){
         Object[] ob = new Object[2];
-        ArrayList[] listaSizes = new ArrayList[3];
-        ArrayList[] listaTimes = new ArrayList[3];
+        ArrayList<Integer>[] listaSizes = new ArrayList[3];
+        ArrayList<Integer>[] listaTimes = new ArrayList[3];
         
         listaSizes[0] = mida_girvan_newman;
         listaSizes[1] = mida_clicke;
@@ -128,8 +155,8 @@ public class Estadistica {
     
     public void cargarEstadistica(){
         Object[] ret = CtrlEstadistica.cargarEstadistica();
-        ArrayList[] sizes = (ArrayList[]) ret[0];
-        ArrayList[] times = (ArrayList[]) ret[1];
+        ArrayList<Integer>[] sizes = (ArrayList<Integer>[]) ret[0];
+        ArrayList<Integer>[] times = (ArrayList<Integer>[]) ret[1];
         mida_girvan_newman = sizes[0];
         mida_clicke = sizes[1];
         mida_louvain = sizes[2];
