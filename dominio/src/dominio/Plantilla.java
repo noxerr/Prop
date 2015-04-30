@@ -132,6 +132,8 @@ public class Plantilla {
         //MAP ... TAL = NEW HASHMAP TAL.. ; TAL = (MAP<TAL,TAL>) OBJETO[1].
     }
     
+    // Pre: existeix la plantilla
+    //Post: retorna el nom de la plantilla actual
     public String getNom(){
         return this.nom;
     }
