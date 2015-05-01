@@ -131,4 +131,8 @@ public class CtrlPlantilla {
         }        
     }
     
+    public static Plantilla getPlantilla(){
+        return plantilla;
+    }
+    
 }
