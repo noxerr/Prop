@@ -6,12 +6,15 @@
 
 package drivers;
 
+import dominio.controlador.CtrlEstadistica;
+
 /**
  *
  * @author dani__000
  */
 public class DriverEstadistica {
     public static void main(String[] args) throws Exception {
-        
+        CtrlEstadistica.resetearEstadisticas();
+        String a = CtrlEstadistica.rapid();
     }
 }

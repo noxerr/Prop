@@ -45,43 +45,43 @@ public class CtrlEstadistica {
         CtrlPersistenciaEstadistica.guardarEstadistica(ob);
     }
 
-    public void afegeix_mida_alg(int[] mida){
-        
+    public static void afegeix_mida_alg(int[] mida){
+        estadistica.afegeix_mida_alg(mida);
     }
     
-    public void afegeix_temps_alg(int[] g){
-        
+    public static void afegeix_temps_alg(int[] g){
+        estadistica.afegeix_temps_alg(g);
     }
     
-    public int mitj_temps_GN(){
+    public static int mitj_temps_GN(){
         return estadistica.mitj_temps_GN();
     }
     
-    public int mitj_temps_Clicke(){
+    public static int mitj_temps_Clicke(){
         return estadistica.mitj_temps_Clicke();
     }
     
-    public int mitj_temps_Louvain(){
+    public static int mitj_temps_Louvain(){
         return estadistica.mitj_temps_Louvain();
     }
     
-    public int mitj_mida_GN(){
+    public static int mitj_mida_GN(){
         return estadistica.mitj_mida_GN();
     }
     
-    public int mitj_mida_Clicke(){
+    public static int mitj_mida_Clicke(){
         return estadistica.mitj_mida_Clicke();
     }
     
-    public int mitj_mida_Louvain(){
+    public static int mitj_mida_Louvain(){
         return estadistica.mitj_mida_Louvain();
     }
     
-    public String rapid(){
+    public static String rapid(){
         return estadistica.rapid();
     }
     
-    public String petit(){
+    public static String petit(){
         return estadistica.petit();
     }
 }

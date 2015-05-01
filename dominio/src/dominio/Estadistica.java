@@ -64,7 +64,7 @@ public class Estadistica {
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        ret = suma/(temps_g.size());
+        if (temps_g.size() > 0) ret = suma/(temps_g.size());
         return ret;
     }
 
@@ -78,7 +78,7 @@ public class Estadistica {
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        ret = suma/(temps_c.size());
+        if (temps_c.size() > 0) ret = suma/(temps_c.size());
         return ret;
     }
 
@@ -92,7 +92,7 @@ public class Estadistica {
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        ret = suma/(temps_s.size());
+        if (temps_s.size() > 0) ret = suma/(temps_s.size());
         return ret;
     }
     
@@ -106,7 +106,7 @@ public class Estadistica {
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        ret = suma/(mida_girvan_newman.size());
+        if (mida_girvan_newman.size() > 0) ret = suma/(mida_girvan_newman.size());
         return ret;
     }
 
@@ -120,7 +120,7 @@ public class Estadistica {
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        ret = suma/(mida_clicke.size());
+        if (mida_clicke.size() > 0) ret = suma/(mida_clicke.size());
         return ret;
     }    
     
@@ -134,7 +134,7 @@ public class Estadistica {
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        ret = suma/(mida_louvain.size());
+        if (mida_louvain.size() > 0) ret = suma/(mida_louvain.size());
         return ret;
     }
 
@@ -142,8 +142,9 @@ public class Estadistica {
     //Pre: cert
     //Post: retorna el nom de l’algorisme més rapid per la última solució
     public String rapid(){
-        mida_girvan_newman.get(mida_girvan_newman.size()-1);
-        return "";
+        if (mida_girvan_newman.size()>0) 
+            System.out.println(mida_girvan_newman.get(mida_girvan_newman.size()-1));
+        return "Hola";
     }
 
     //Pre: cert
