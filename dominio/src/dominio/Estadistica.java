@@ -16,8 +16,7 @@ import java.util.Iterator;
  */
 public class Estadistica {
     
-    private ArrayList<Integer> mida_girvan_newman, mida_clicke, mida_louvain;//integers
-    private ArrayList<Integer> temps_g, temps_c, temps_s;//doubles
+    private ArrayList<Integer> mida_girvan_newman, mida_clicke, mida_louvain, temps_g, temps_c, temps_s;
     
     //Pre: cert
     //Post: crea una estadistica
@@ -28,6 +27,16 @@ public class Estadistica {
         temps_g = new ArrayList();
         temps_c = new ArrayList();
         temps_s = new ArrayList();
+    }
+    
+    public Estadistica(ArrayList<Integer>[] sizes, ArrayList<Integer>[] times){
+        this.mida_girvan_newman = sizes[0];
+        this.mida_clicke = sizes[1];
+        this.mida_louvain = sizes[2];
+        
+        this.temps_g = times[0];
+        this.temps_c = times[1];
+        this.temps_s = times[2];
     }
 
     //Pre: cert
@@ -69,7 +78,7 @@ public class Estadistica {
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        ret = suma/(temps_g.size());
+        ret = suma/(temps_c.size());
         return ret;
     }
 
@@ -83,7 +92,7 @@ public class Estadistica {
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        ret = suma/(temps_g.size());
+        ret = suma/(temps_s.size());
         return ret;
     }
     
@@ -91,46 +100,61 @@ public class Estadistica {
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de girvan Newman guardats
     public int mitj_mida_GN(){
-        return 0;
-        
+        Iterator it = mida_girvan_newman.iterator();
+        int suma = 0;
+        int ret = 0;
+        while (it.hasNext()){
+            suma += (int) it.next();
+        }
+        ret = suma/(mida_girvan_newman.size());
+        return ret;
     }
 
+    
+    //Pre: cert
+    //Post: retorna la mitjana dels tamanys de clicke guardats
+    public int mitj_mida_Clicke(){
+        Iterator it = mida_clicke.iterator();
+        int suma = 0;
+        int ret = 0;
+        while (it.hasNext()){
+            suma += (int) it.next();
+        }
+        ret = suma/(mida_clicke.size());
+        return ret;
+    }    
+    
+    
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de louvain guardats
     public int mitj_mida_Louvain(){
-        return 0;
-        
+        Iterator it = mida_louvain.iterator();
+        int suma = 0;
+        int ret = 0;
+        while (it.hasNext()){
+            suma += (int) it.next();
+        }
+        ret = suma/(mida_louvain.size());
+        return ret;
     }
 
-
-    //Pre: cert
-    //Post: retorna la mitjana dels tamanys de clicke guardats
-    int mitj_mida_Clicke(){
-        return 0;
-        
-    }
 
     //Pre: cert
     //Post: retorna el nom de l’algorisme més rapid per la última solució
-    String rapid(){
-        return null;
-        
+    public String rapid(){
+        mida_girvan_newman.get(mida_girvan_newman.size()-1);
+        return "";
     }
 
     //Pre: cert
-    //Post: retorna el nom de l’algorisme la solució del cual ocupa menys espai per la última //solució
-    String petit(){
-        return null;
-        
+    //Post: retorna el nom de l’algorisme la solució del cual ocupa menys espai per la última solució
+    public String petit(){
+        return null;   
     }
 
-    //Pre: cert
-    //Post: retorna estadístiques
-    Estadistica ret_estadistiques(){
-        return null;
-    }
     
-    public Object[] convertToArray(){
+    
+    public Object[] getSizesTimes(){
         Object[] ob = new Object[2];
         ArrayList<Integer>[] listaSizes = new ArrayList[3];
         ArrayList<Integer>[] listaTimes = new ArrayList[3];
@@ -148,22 +172,16 @@ public class Estadistica {
         return ob;
     }
     
-    public void actualizarEstadistica(){
-        Object[] ob = convertToArray();
-        CtrlEstadistica.actualizarEstadistica(ob);
+    
+    public void setSizesTimes(ArrayList<Integer>[] sizes, ArrayList<Integer>[] times){
+        this.mida_girvan_newman = sizes[0];
+        this.mida_clicke = sizes[1];
+        this.mida_louvain = sizes[2];
+        
+        this.temps_g = times[0];
+        this.temps_c = times[1];
+        this.temps_s = times[2];
     }
     
-    public void cargarEstadistica(){
-        Object[] ret = CtrlEstadistica.cargarEstadistica();
-        ArrayList<Integer>[] sizes = (ArrayList<Integer>[]) ret[0];
-        ArrayList<Integer>[] times = (ArrayList<Integer>[]) ret[1];
-        mida_girvan_newman = sizes[0];
-        mida_clicke = sizes[1];
-        mida_louvain = sizes[2];
-        temps_g = times[0];
-        temps_c = times[1]; 
-        temps_s = times[2];
-        
-    }
 
 }
