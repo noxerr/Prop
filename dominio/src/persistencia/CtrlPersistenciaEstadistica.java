@@ -18,10 +18,16 @@ import java.util.Arrays;
 public class CtrlPersistenciaEstadistica {
     public static Object[] cargarEstadistica() throws IOException{
         Object[] ob = new Object[2];
-        ArrayList<Integer> sizes = new ArrayList<>(
-            Arrays.asList(1, 2, 3));
-        ArrayList<Integer> times = new ArrayList<>(
-            Arrays.asList(10, 20, 30));
+        ArrayList<Integer>[] sizes = new ArrayList[3];
+        sizes[0] = new ArrayList<>(Arrays.asList(1, 2, 3));
+        sizes[1] = new ArrayList<>(Arrays.asList(1, 2, 3));
+        sizes[2] = new ArrayList<>(Arrays.asList(1, 2, 3));
+        
+        ArrayList<Integer>[] times = new ArrayList[3];
+        times[0] = new ArrayList<>(Arrays.asList(10, 20, 30));
+        times[1] = new ArrayList<>(Arrays.asList(10, 20, 30));
+        times[2] = new ArrayList<>(Arrays.asList(10, 20, 30));
+        
         ob[0] = sizes;
         ob[1]= times;
         return ob;

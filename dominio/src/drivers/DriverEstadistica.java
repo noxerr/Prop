@@ -14,7 +14,8 @@ import dominio.controlador.CtrlEstadistica;
  */
 public class DriverEstadistica {
     public static void main(String[] args) throws Exception {
-        CtrlEstadistica.resetearEstadisticas();
+        CtrlEstadistica.initEstadistica();
         String a = CtrlEstadistica.rapid();
+        CtrlEstadistica.mitj_mida_GN();
     }
 }
