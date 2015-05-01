@@ -19,9 +19,9 @@ public class CtrlPersistenciaEstadistica {
     public static Object[] cargarEstadistica() throws IOException{
         Object[] ob = new Object[2];
         ArrayList<Integer>[] sizes = new ArrayList[3];
-        sizes[0] = new ArrayList<>(Arrays.asList(1, 2, 3));
-        sizes[1] = new ArrayList<>(Arrays.asList(1, 2, 3));
-        sizes[2] = new ArrayList<>(Arrays.asList(1, 2, 3));
+        sizes[0] = new ArrayList<>(Arrays.asList(2, 2, 5));
+        sizes[1] = new ArrayList<>(Arrays.asList(4, 1, 3));
+        sizes[2] = new ArrayList<>(Arrays.asList(1, 52, 83));
         
         ArrayList<Integer>[] times = new ArrayList[3];
         times[0] = new ArrayList<>(Arrays.asList(10, 20, 30));

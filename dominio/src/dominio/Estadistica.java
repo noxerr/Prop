@@ -7,6 +7,7 @@
 package dominio;
 
 import dominio.controlador.CtrlEstadistica;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -16,7 +17,7 @@ import java.util.Iterator;
  */
 public class Estadistica {
     
-    private ArrayList<Integer> mida_girvan_newman, mida_clicke, mida_louvain, temps_g, temps_c, temps_s;
+    private ArrayList<Integer> mida_girvan_newman, mida_clicke, mida_louvain, temps_g, temps_c, temps_l;
     
     //Pre: cert
     //Post: crea una estadistica
@@ -26,7 +27,7 @@ public class Estadistica {
         mida_louvain = new ArrayList();
         temps_g = new ArrayList();
         temps_c = new ArrayList();
-        temps_s = new ArrayList();
+        temps_l = new ArrayList();
     }
     
     public Estadistica(ArrayList<Integer>[] sizes, ArrayList<Integer>[] times){
@@ -36,7 +37,7 @@ public class Estadistica {
         
         this.temps_g = times[0];
         this.temps_c = times[1];
-        this.temps_s = times[2];
+        this.temps_l = times[2];
     }
 
     //Pre: cert
@@ -52,7 +53,7 @@ public class Estadistica {
     public void afegeix_temps_alg(int[] g){
         temps_g.add(g[0]);
         temps_c.add(g[1]);
-        temps_s.add(g[2]);
+        temps_l.add(g[2]);
     }
 
     //Pre: cert
@@ -86,23 +87,23 @@ public class Estadistica {
     //Pre: cert
     //Post: retorna la mitjana dels temps de louvain guardats
     public int mitj_temps_Louvain(){
-        Iterator it = temps_s.iterator();
+        Iterator it = temps_l.iterator();
         int suma = 0;
         int ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        if (temps_s.size() > 0) ret = suma/(temps_s.size());
+        if (temps_l.size() > 0) ret = suma/(temps_l.size());
         return ret;
     }
     
     
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de girvan Newman guardats
-    public int mitj_mida_GN(){
+    public double mitj_mida_GN(){
         Iterator it = mida_girvan_newman.iterator();
-        int suma = 0;
-        int ret = 0;
+        double suma = 0;
+        double ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
@@ -113,10 +114,10 @@ public class Estadistica {
     
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de clicke guardats
-    public int mitj_mida_Clicke(){
+    public double mitj_mida_Clicke(){
         Iterator it = mida_clicke.iterator();
-        int suma = 0;
-        int ret = 0;
+        double suma = 0;
+        double ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
@@ -127,10 +128,10 @@ public class Estadistica {
     
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de louvain guardats
-    public int mitj_mida_Louvain(){
+    public double mitj_mida_Louvain(){
         Iterator it = mida_louvain.iterator();
-        int suma = 0;
-        int ret = 0;
+        double suma = 0;
+        double ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
@@ -142,15 +143,66 @@ public class Estadistica {
     //Pre: cert
     //Post: retorna el nom de l’algorisme més rapid per la última solució
     public String rapid(){
-        if (mida_girvan_newman.size()>0) 
-            System.out.println(mida_girvan_newman.get(mida_girvan_newman.size()-1));
-        return "Hola";
+        DecimalFormat df = new DecimalFormat("0.00");
+        double midaG = 0, midaC = 0, midaL = 0, timeG = 0, timeC = 0, timeL = 0, 
+                vG = 0, vC = 0, vL = 0;
+        double fastest;
+        String ret = "El alg. más rápido es ";
+        if (mida_girvan_newman.size()>0){
+            midaG = mida_girvan_newman.get(mida_girvan_newman.size()-1);
+            timeG = temps_g.get(temps_g.size()-1);
+            vG = midaG/timeG;
+            //System.out.println(df.format(vG));
+            //System.out.println(mida_girvan_newman.get(mida_girvan_newman.size()-1));
+        }
+        if (mida_clicke.size()>0) {
+            midaC = mida_clicke.get(mida_clicke.size()-1);
+            timeC = temps_c.get(temps_c.size()-1);
+            vC = midaC/timeC;
+            //System.out.println(df.format(vC));
+        }
+        if (mida_louvain.size()>0){
+            midaL = mida_louvain.get(mida_louvain.size()-1);
+            timeL = temps_l.get(temps_l.size()-1);
+            vL = midaL/timeL;
+            //System.out.println(df.format(vL));
+        }
+        
+        double aux = Math.max(vG, vC);
+        aux = Math.max(aux, vL);
+        
+        if (aux == vG) ret = ret.concat("Girvan Newman\ncon velocidad: " + df.format(vG) + " nodos/msec");
+        else if (aux == vC) ret = ret.concat("Clicke\ncon velocidad: " + df.format(vC) + " nodos/msec");
+        else ret = ret.concat("Louvain\ncon velocidad: " + df.format(vL) + " nodos/msec");
+        
+        return ret;
     }
 
     //Pre: cert
     //Post: retorna el nom de l’algorisme la solució del cual ocupa menys espai per la última solució
     public String petit(){
-        return null;   
+        int midaG = 0, midaC = 0, midaL = 0;
+        DecimalFormat df = new DecimalFormat("0.00");
+        String ret = "L'algorisme que menys ocupa es ";
+        
+        if (mida_girvan_newman.size()>0){
+            midaG = mida_girvan_newman.get(mida_girvan_newman.size()-1);
+        }
+        if (mida_clicke.size()>0) {
+            midaC = mida_clicke.get(mida_clicke.size()-1);
+        }
+        if (mida_louvain.size()>0){
+            midaL = mida_louvain.get(mida_louvain.size()-1);
+        }
+        
+        int aux = Math.min(midaG, midaC);
+        aux = Math.min(aux, midaL);
+
+        if (aux == midaG) ret = ret.concat("Girvan Newman\namb: " + df.format(midaG) + " nodes");
+        else if (aux == midaC) ret = ret.concat("Clicke\namb: " + df.format(midaC) + " nodes");
+        else ret = ret.concat("Louvain\namb: " + df.format(midaL) + " nodes");
+        
+        return ret;
     }
 
     
@@ -166,7 +218,7 @@ public class Estadistica {
         
         listaTimes[0] = temps_g;
         listaTimes[1] = temps_c;
-        listaTimes[2] = temps_s;
+        listaTimes[2] = temps_l;
         
         ob[0] = listaSizes;
         ob[1] = listaTimes;
@@ -181,7 +233,7 @@ public class Estadistica {
         
         this.temps_g = times[0];
         this.temps_c = times[1];
-        this.temps_s = times[2];
+        this.temps_l = times[2];
     }
     
 

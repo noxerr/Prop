@@ -65,15 +65,15 @@ public class CtrlEstadistica {
         return estadistica.mitj_temps_Louvain();
     }
     
-    public static int mitj_mida_GN(){
+    public static double mitj_mida_GN(){
         return estadistica.mitj_mida_GN();
     }
     
-    public static int mitj_mida_Clicke(){
+    public static double mitj_mida_Clicke(){
         return estadistica.mitj_mida_Clicke();
     }
     
-    public static int mitj_mida_Louvain(){
+    public static double mitj_mida_Louvain(){
         return estadistica.mitj_mida_Louvain();
     }
     
