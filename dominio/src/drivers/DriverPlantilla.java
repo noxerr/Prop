@@ -10,6 +10,9 @@ import dominio.controlador.CtrlPlantilla;
 import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.Scanner;
+import persistencia.Persistencia;
+import presentacion.NewJFrame;
+import presentacion.VistaParlament;
 
 /**
  *
@@ -165,5 +168,10 @@ public class DriverPlantilla {
         /*while(true){
             int a = input.nextInt();
         }*/
+        
+        Persistencia.guardarDisco(ob, "hola.txt", ret);
+        Persistencia.cargarDisco("hola.txt", ret);
+        
+        new NewJFrame().setVisible(true);
     }
 }

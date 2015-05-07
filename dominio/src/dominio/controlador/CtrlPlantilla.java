@@ -113,6 +113,7 @@ public class CtrlPlantilla {
     }
     
     public static void modNom(String nom) throws Exception{
+        if (nom.isEmpty()) throw new Exception ("El nom no pot estar buit");
         if ("default".equalsIgnoreCase(plantilla.getNom())) throw new Exception("La plantilla default no se puede modificar");
         else if (listaPlantillas.contains(nom)) throw new Exception("Ya existe la plantilla "+ nom + ".");
         else {           

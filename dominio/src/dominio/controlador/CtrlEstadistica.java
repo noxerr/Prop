@@ -17,7 +17,7 @@ import persistencia.CtrlPersistenciaEstadistica;
  * @author dani__000
  */
 public class CtrlEstadistica {
-    private static Estadistica estadistica;
+    private static Estadistica estadistica = new Estadistica();
     
     public static void initEstadistica() throws IOException{
         Object[] ret = CtrlPersistenciaEstadistica.cargarEstadistica();
