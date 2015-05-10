@@ -80,12 +80,18 @@ is divided into following sections:
             </and>
         </condition>
         <condition property="do.archive">
+<<<<<<< HEAD
             <or>
                 <not>
                     <istrue value="${jar.archive.disabled}"/>
                 </not>
                 <istrue value="${not.archive.disabled}"/>
             </or>
+=======
+            <not>
+                <istrue value="${jar.archive.disabled}"/>
+            </not>
+>>>>>>> a0459c0d47d5199a82aeba36a50e79f424217c73
         </condition>
         <condition property="do.mkdist">
             <and>
@@ -1202,6 +1208,7 @@ is divided into following sections:
                 </not>
             </and>
         </condition>
+<<<<<<< HEAD
         <condition else="" property="bug5101868workaround" value="*.java">
             <matches pattern="1\.[56](\..*)?" string="${java.version}"/>
         </condition>
@@ -1210,6 +1217,13 @@ is divided into following sections:
                 <path path="${javac.classpath}"/>
             </classpath>
             <fileset dir="${src.dir}" excludes="${bug5101868workaround},${excludes}" includes="${includes}">
+=======
+        <javadoc additionalparam="${javadoc.additionalparam}" author="${javadoc.author}" charset="UTF-8" destdir="${dist.javadoc.dir}" docencoding="UTF-8" encoding="${javadoc.encoding.used}" failonerror="true" noindex="${javadoc.noindex}" nonavbar="${javadoc.nonavbar}" notree="${javadoc.notree}" private="${javadoc.private}" source="${javac.source}" splitindex="${javadoc.splitindex}" use="${javadoc.use}" useexternalfile="true" version="${javadoc.version}" windowtitle="${javadoc.windowtitle}">
+            <classpath>
+                <path path="${javac.classpath}"/>
+            </classpath>
+            <fileset dir="${src.dir}" excludes="*.java,${excludes}" includes="${includes}">
+>>>>>>> a0459c0d47d5199a82aeba36a50e79f424217c73
                 <filename name="**/*.java"/>
             </fileset>
             <fileset dir="${build.generated.sources.dir}" erroronmissingdir="false">
@@ -1283,7 +1297,11 @@ is divided into following sections:
         <mkdir dir="${build.test.results.dir}"/>
     </target>
     <target depends="init,compile-test,-pre-test-run" if="have.tests" name="-do-test-run">
+<<<<<<< HEAD
         <j2seproject3:test includes="${includes}" testincludes="**/*Test.java"/>
+=======
+        <j2seproject3:test testincludes="**/*Test.java"/>
+>>>>>>> a0459c0d47d5199a82aeba36a50e79f424217c73
     </target>
     <target depends="init,compile-test,-pre-test-run,-do-test-run" if="have.tests" name="-post-test-run">
         <fail if="tests.failed" unless="ignore.failing.tests">Some tests failed; see details above.</fail>
