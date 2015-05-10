@@ -29,11 +29,8 @@ public class DriverEstadistica {
         System.out.println(CtrlEstadistica.petit());
         
         System.out.println("mida mitja GN: " + CtrlEstadistica.mitj_mida_GN());
-<<<<<<< HEAD
-        System.out.println("mida mitja Clicke: " + CtrlEstadistica.mitj_mida_Clicke() );
-=======
         System.out.println("mida mitja Clicke: " + CtrlEstadistica.mitj_mida_Clicke());
->>>>>>> a0459c0d47d5199a82aeba36a50e79f424217c73
+        System.out.println("mida mitja Clicke: " + CtrlEstadistica.mitj_mida_Clicke());
         System.out.println("mida mitja Louvain: " + CtrlEstadistica.mitj_mida_Louvain());
     }
 }
