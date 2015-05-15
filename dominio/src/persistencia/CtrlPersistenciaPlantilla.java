@@ -43,4 +43,13 @@ public class CtrlPersistenciaPlantilla {
         //ret = llamarFuncionCargarCosasDeDisco
         return ret;
     }
+    
+    public static ArrayList<ArrayList<String>> cargarPlantillas(){
+        ArrayList<ArrayList<String>> list = new ArrayList();
+        ArrayList<String> ret = new ArrayList<>(
+            Arrays.asList("una", "0", "2", "3", "4", "5", "6", "7", "8", "9"));
+        list.add(ret);
+        //ret = llamarFuncionCargarCosasDeDisco
+        return list;
+    }
 }

@@ -4,29 +4,32 @@
  */
 package persistencia;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
  * @author daniel.roca.lopez
  */
 public class Persistencia {
-    public static void guardarDisco(Object[] ob, String filename, String type) throws FileNotFoundException, IOException{
-        DataOutputStream out = new DataOutputStream
-            (new FileOutputStream(filename));
-        out.writeChars("El adri es un cabezon");
-        out.writeBytes("\nEl adri es otro cabezon");
+    public static void guardarDisco(ArrayList<String> al, String filename, String type) throws FileNotFoundException, IOException{
+
+        BufferedWriter out =
+            new BufferedWriter(new FileWriter(filename));
+        out.append("El adri es un cabezon");
+        out.flush();
+        //out.writeBytes("\nEl adri es otro cabezon");
         
     }
     
     public static Object[] cargarDisco(String filename, String type) throws FileNotFoundException, IOException{
-        DataInputStream in = new DataInputStream
-            (new FileInputStream(filename));
+        BufferedReader in =
+                new BufferedReader(new FileReader(filename));
         String ret = in.readLine();
         System.out.println(ret);
         String reto = in.readLine();

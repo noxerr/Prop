@@ -20,6 +20,19 @@ public class Plantilla {
     public Plantilla(String nom){
         this.nom = nom;
     }
+    
+    public Plantilla(String nom, int[] listaPond){
+        this.nom = nom;
+        this.votacioEq = listaPond[0];
+        this.votacioDif = listaPond[1];
+        this.reunio = listaPond[2];
+        this.conferencia = listaPond[3];
+        this.dinar = listaPond[4];
+        this.lleure = listaPond[5];
+        this.partit = listaPond[6];
+        this.edat = listaPond[7];
+        this.religio = listaPond[8];
+    }
 
     // MODIFICADORA
     // Pre: plantilla amb nom diferent de “default”

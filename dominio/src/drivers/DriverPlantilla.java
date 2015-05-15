@@ -6,8 +6,11 @@
 
 package drivers;
 
+import dominio.Plantilla;
 import dominio.controlador.CtrlPlantilla;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import persistencia.Persistencia;
@@ -20,7 +23,7 @@ import presentacion.VistaParlament;
  */
 public class DriverPlantilla {
     public static void main(String[] args) throws Exception {
-        Object[] ob = CtrlPlantilla.getPond();
+        Object[] ob = CtrlPlantilla.getPond("default");
         Map<String,Integer> mapa = (Map) ob[1];
         String ret = (String) ob[0];
         System.out.println("Valores default: nom - " + ret + ".\n");
@@ -36,7 +39,7 @@ public class DriverPlantilla {
         
         try{
             //PROBANDO MODNOM ESTANDO EN LA PLANTILLA DEFAULT
-            CtrlPlantilla.modNom("nueva");
+            CtrlPlantilla.modNom("nueva","this");
         }
         catch(Exception e){
             //e.printStackTrace();
@@ -54,7 +57,7 @@ public class DriverPlantilla {
         
         try{
             //MODNOM CON PLANTILLA DIFERENTE A DEFAULT
-            CtrlPlantilla.modNom("primera");
+            CtrlPlantilla.modNom("primera", "this");
         }
         catch(Exception e){
             //e.printStackTrace();
@@ -71,11 +74,11 @@ public class DriverPlantilla {
         
         
         //COMPROBANDO FUNCION MODALL CON PLANTILLA DIF DE DEFAULT
-        CtrlPlantilla.modAll(listaPond);
+        //CtrlPlantilla.modAll(listaPond);
         
         
         //FUNCION GETPOND
-        ob = CtrlPlantilla.getPond();
+        ob = CtrlPlantilla.getPond("default");
         ret = (String) ob[0];
         mapa = (Map) ob[1];
         System.out.println("Valores modificados: nom - " + ret + ".\n");
@@ -119,7 +122,7 @@ public class DriverPlantilla {
         System.out.println(CtrlPlantilla.mostrarListaPlantillas().toString());
         
         //FUNCION GETPOND antes de cargar plantilla
-        ob = CtrlPlantilla.getPond();
+        ob = CtrlPlantilla.getPond("default");
         ret = (String) ob[0];
         mapa = (Map) ob[1];
         System.out.println("\n\nValores modificados: nom - " + ret + ".\n");
@@ -133,7 +136,7 @@ public class DriverPlantilla {
         //cargarplantilla
         CtrlPlantilla.cargarPlantilla("primera");
         //FUNCION GETPOND despues de cargar
-        ob = CtrlPlantilla.getPond();
+        ob = CtrlPlantilla.getPond("primera");
         ret = (String) ob[0];
         mapa = (Map) ob[1];
         System.out.println("\n\nValores modificados: nom - " + ret + ".\n");
@@ -169,9 +172,31 @@ public class DriverPlantilla {
             int a = input.nextInt();
         }*/
         
-        Persistencia.guardarDisco(ob, "hola.txt", ret);
-        Persistencia.cargarDisco("hola.txt", ret);
+        ArrayList<String> ar = new ArrayList();
+        Persistencia.guardarDisco(ar, "hola2.txt", ret);
+        Persistencia.cargarDisco("hola2.txt", ret);
         
         new NewJFrame().setVisible(true);
+        
+        Plantilla p = CtrlPlantilla.mapPlantillas.get("una");
+        int n = 0;
+        Object[] a = p.getPond();
+        int[] i = new int[9];
+        int k = 0;
+        HashMap<String, Integer> mapita = (HashMap<String, Integer>) a[1];
+        for (String s : mapita.keySet()){
+            i[k] = mapita.get(s);
+            k++;
+        }
+        /*for (String clave : mapa.keySet()) {   
+            int valor = mapa.get(clave);
+            total += (valor*lista[i]);
+            if (i<9)i++; //para evitar errores
+        }*/
+        while(n < 9){
+            System.out.println(i[n]);
+            n++;
+        }
+        
     }
 }
