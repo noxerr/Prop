@@ -134,7 +134,7 @@ public class DriverPlantilla {
         
         
         //cargarplantilla
-        CtrlPlantilla.cargarPlantilla("primera");
+        //CtrlPlantilla.cargarPlantilla("primera");
         //FUNCION GETPOND despues de cargar
         ob = CtrlPlantilla.getPond("primera");
         ret = (String) ob[0];
@@ -146,11 +146,11 @@ public class DriverPlantilla {
         }
         
         //cargando plantilla que no existe
-        try{
+       /* try{
             CtrlPlantilla.cargarPlantilla("noExisto");
         }catch(FileNotFoundException f){
             System.out.println("\n" + f.toString() + ". No existe la plantilla");
-        }
+        }*/
         
         
         //borrando plantilla
@@ -188,11 +188,6 @@ public class DriverPlantilla {
             i[k] = mapita.get(s);
             k++;
         }
-        /*for (String clave : mapa.keySet()) {   
-            int valor = mapa.get(clave);
-            total += (valor*lista[i]);
-            if (i<9)i++; //para evitar errores
-        }*/
         while(n < 9){
             System.out.println(i[n]);
             n++;

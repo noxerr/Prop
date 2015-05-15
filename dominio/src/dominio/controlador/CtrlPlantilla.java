@@ -21,9 +21,10 @@ import persistencia.CtrlPersistenciaPlantilla;
  * @author dani__000
  */
 public class CtrlPlantilla {
-    private static Plantilla plantilla = new Plantilla("Default");
+    private static final int[] aux = new int[9];
+    private static final Plantilla plantilla = new Plantilla("Default", aux);
     private static ArrayList<String> listaPlantillas = cargarListaPlantillas();
-    private static ListIterator it = listaPlantillas.listIterator();
+    private static ListIterator it;
     public static Map<String,Plantilla> mapPlantillas = cargarPlantillas();
     private static String oldName;
     
@@ -32,8 +33,8 @@ public class CtrlPlantilla {
         else if (listaPlantillas.contains(nom)) throw new Exception("Ya existe la plantilla "+ nom + ".");
         else {
             CtrlPersistenciaPlantilla.crearPlantilla(nom);
-            plantilla = new Plantilla(nom);
             listaPlantillas.add(nom);
+            mapPlantillas.put(nom, new Plantilla(nom));
         }
     }
     
@@ -42,11 +43,12 @@ public class CtrlPlantilla {
         else if(nom.equalsIgnoreCase("default")) throw new Exception("La plantilla default no se puede borrar");
         else {
             CtrlPersistenciaPlantilla.borrarPlantilla(nom);
-            listaPlantillas.remove(nom);  
+            listaPlantillas.remove(nom); 
+            mapPlantillas.remove(nom);
         }
     }
     
-    public static void cargarPlantilla(String nom) throws IOException, FileNotFoundException{
+    /*public static void cargarPlantilla(String nom) throws IOException, FileNotFoundException{
         if (!listaPlantillas.contains(nom)) throw new FileNotFoundException();
         else {
             int[] nueva = CtrlPersistenciaPlantilla.cargarPlantilla(nom);
@@ -63,7 +65,7 @@ public class CtrlPlantilla {
         }
 
         
-    }
+    }*/
     
     public static void guardarPlantilla(String nom) throws Exception, IOException{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede guardar la plantilla por defecto");
