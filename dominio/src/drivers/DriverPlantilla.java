@@ -23,7 +23,8 @@ import presentacion.VistaParlament;
  */
 public class DriverPlantilla {
     public static void main(String[] args) throws Exception {
-        Object[] ob = CtrlPlantilla.getPond("default");
+        CtrlPlantilla.cargarPlantillas();
+        Object[] ob = CtrlPlantilla.getPond("Default");
         Map<String,Integer> mapa = (Map) ob[1];
         String ret = (String) ob[0];
         System.out.println("Valores default: nom - " + ret + ".\n");
@@ -78,7 +79,7 @@ public class DriverPlantilla {
         
         
         //FUNCION GETPOND
-        ob = CtrlPlantilla.getPond("default");
+        ob = CtrlPlantilla.getPond("Default");
         ret = (String) ob[0];
         mapa = (Map) ob[1];
         System.out.println("Valores modificados: nom - " + ret + ".\n");
@@ -89,14 +90,14 @@ public class DriverPlantilla {
         
         
         //CALCUL AFINITAT
-        int retur = CtrlPlantilla.calculAfinitat(listaPond, "default");
+        int retur = CtrlPlantilla.calculAfinitat(listaPond, "Default");
         //deberia dar 204 (0*0 + 1*1 + 2*2 + 3*3.. +8*8 xk las ponderaciones las he puesto
         //de 0 a 8 y las coincidencias de eventos tambien
         System.out.println("La afinitat dels dos diputats es de: " + retur);
         
         //probando de crear otra plantilla con un nombre ya existente
         try{
-            CtrlPlantilla.crearPlantilla("default");
+            CtrlPlantilla.crearPlantilla("Default");
         }catch(Exception e){
             //e.printStackTrace();
             System.out.println("entra aki1");
@@ -122,7 +123,7 @@ public class DriverPlantilla {
         System.out.println(CtrlPlantilla.mostrarListaPlantillas().toString());
         
         //FUNCION GETPOND antes de cargar plantilla
-        ob = CtrlPlantilla.getPond("default");
+        ob = CtrlPlantilla.getPond("Default");
         ret = (String) ob[0];
         mapa = (Map) ob[1];
         System.out.println("\n\nValores modificados: nom - " + ret + ".\n");
@@ -178,7 +179,8 @@ public class DriverPlantilla {
         
         new NewJFrame().setVisible(true);
         
-        Plantilla p = CtrlPlantilla.mapPlantillas.get("una");
+        Map<String,Plantilla> mapaPlantillas = CtrlPlantilla.mostarMapaPlantillas();
+        Plantilla p = mapaPlantillas.get("una");
         int n = 0;
         Object[] a = p.getPond();
         int[] i = new int[9];

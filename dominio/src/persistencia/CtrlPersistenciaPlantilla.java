@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 public class CtrlPersistenciaPlantilla {
 
-    public static void guardarPlantillas() throws IOException{
+    public static void guardarPlantillas(ArrayList<ArrayList<String>> list) throws IOException{
         //llamarFuncionAñadirCosasADisco
     }
     

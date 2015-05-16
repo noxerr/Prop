@@ -21,11 +21,9 @@ import persistencia.CtrlPersistenciaPlantilla;
  * @author dani__000
  */
 public class CtrlPlantilla {
-    private static final int[] aux = new int[9];
-    private static final Plantilla plantilla = new Plantilla("Default", aux);
     private static ArrayList<String> listaPlantillas = new ArrayList();// = cargarListaPlantillas();
     private static ListIterator it;
-    public static Map<String,Plantilla> mapPlantillas = cargarPlantillas();
+    private static Map<String,Plantilla> mapPlantillas = cargarPlantillas();
     private static String oldName;
     
     public static void crearPlantilla(String nom) throws Exception, IOException{
@@ -49,11 +47,68 @@ public class CtrlPlantilla {
     
     
     public static void guardarPlantillas() throws IOException{
-        CtrlPersistenciaPlantilla.guardarPlantillas();
-        /*for (String clave : mapa.keySet()) {   
-            Integer valor = mapa.get(clave);
-            System.out.println("Clave: " + clave + ": " + valor);
-        }*/
+        ArrayList<ArrayList<String>> list = new ArrayList();
+        ArrayList<String> plantilla;
+        for (String clave : mapPlantillas.keySet()) { 
+            plantilla = new ArrayList();
+            Plantilla valor = mapPlantillas.get(clave);
+            Object[] ob = valor.getPond();
+            Map<String, Integer> mp = (Map<String, Integer>) ob[1];
+            plantilla.add((String) ob[0]);
+            for (int i : mp.values()){
+                plantilla.add(String.valueOf(i));
+            }
+            list.add(plantilla);
+        }
+        CtrlPersistenciaPlantilla.guardarPlantillas(list);
+    }
+    
+    public static HashMap<String, Plantilla> cargarPlantillas() {
+        ArrayList<ArrayList<String>> list = CtrlPersistenciaPlantilla.cargarPlantillas();
+        HashMap<String, Plantilla> map = new HashMap();
+        ListIterator l1 = list.listIterator();
+        ListIterator l2;
+        int[] pond = new int[9];
+        String nom;
+        int n;
+        Plantilla p;
+        while (l1.hasNext()){
+            l2 = ((ArrayList<String>) l1.next()).listIterator();
+            n = 0;
+            nom = (String) l2.next();
+            while (l2.hasNext()){
+                pond[n] = Integer.valueOf((String) l2.next());
+                n++;
+            }
+            ponder(pond);
+            p = new Plantilla(nom,pond);
+            map.put(nom, p);
+        }
+        for (String v : map.keySet()){
+            if (!listaPlantillas.contains(v)) listaPlantillas.add(v);
+        }
+        if (!listaPlantillas.contains("Default")) {
+            listaPlantillas.add("Default");
+            map.put("Default", new Plantilla("Default", new int[9]));
+        }
+        return map;
+    }
+    
+    
+    private static void ponder(int[] pond) {
+        int aux = pond[6];
+        pond[6] = pond[1];
+        pond[1] = pond[4];
+        pond[4] = pond[3];
+        pond[3] = pond[2];
+        pond[2] = pond[5];
+        pond[5] = pond[8];
+        pond[8] = pond[7];
+        pond[7] = aux;
+    }
+    
+    public static Map<String,Plantilla> mostarMapaPlantillas(){
+        return mapPlantillas;
     }
     
     
@@ -181,30 +236,5 @@ public class CtrlPlantilla {
         }
     }
 
-    public static HashMap<String, Plantilla> cargarPlantillas() {
-        ArrayList<ArrayList<String>> list = CtrlPersistenciaPlantilla.cargarPlantillas();
-        HashMap<String, Plantilla> map = new HashMap();
-        ListIterator l1 = list.listIterator();
-        ListIterator l2;
-        int[] pond = new int[9];
-        String nom;
-        int n;
-        Plantilla p;
-        while (l1.hasNext()){
-            l2 = ((ArrayList<String>) l1.next()).listIterator();
-            n = 0;
-            nom = (String) l2.next();
-            while (l2.hasNext()){
-                pond[n] = Integer.valueOf((String) l2.next());
-                n++;
-            }
-            p = new Plantilla(nom,pond);
-            map.put(nom, p);
-        }
-        for (String v : map.keySet()){
-            if (!listaPlantillas.contains(v)) listaPlantillas.add(v);
-        }
-        return map;
-    }
     
 }
