@@ -45,12 +45,8 @@ public class CtrlEstadistica {
         CtrlPersistenciaEstadistica.guardarEstadistica(ob);
     }
 
-    public static void afegeix_mida_alg(int[] mida){
-        estadistica.afegeix_mida_alg(mida);
-    }
-    
-    public static void afegeix_temps_alg(int[] g){
-        estadistica.afegeix_temps_alg(g);
+    public static void afegeix_mida_temps(int[] mida, int[] g){
+        estadistica.afegeix_mida_temps(mida, g);
     }
     
     public static int mitj_temps_GN(){

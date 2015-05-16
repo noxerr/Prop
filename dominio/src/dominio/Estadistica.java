@@ -6,144 +6,147 @@
 
 package dominio;
 
-import dominio.controlador.CtrlEstadistica;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import javafx.util.Pair;
 
 /**
  *
  * @author dani__000
  */
 public class Estadistica {
-    
+    //the pair contains: num veces rep : integer, t total : integer
+    private HashMap<Integer, StrucDatos> mapaNewman;
+    private HashMap<Integer, StrucDatos> mapaClicke;
+    private HashMap<Integer, StrucDatos> mapaLouvain;
     private ArrayList<Integer> mida_girvan_newman, mida_clicke, mida_louvain, temps_g, temps_c, temps_l;
     
     //Pre: cert
     //Post: crea una estadistica
     public Estadistica(){
-        mida_girvan_newman = new ArrayList(); 
+        /*mida_girvan_newman = new ArrayList(); 
         mida_clicke = new ArrayList(); 
         mida_louvain = new ArrayList();
         temps_g = new ArrayList();
         temps_c = new ArrayList();
-        temps_l = new ArrayList();
+        temps_l = new ArrayList();*/
+        mapaNewman = new HashMap();
+        mapaClicke = new HashMap();
+        mapaLouvain = new HashMap();
     }
     
     public Estadistica(ArrayList<Integer>[] sizes, ArrayList<Integer>[] times){
-        this.mida_girvan_newman = sizes[0];
+        /*this.mida_girvan_newman = sizes[0];
         this.mida_clicke = sizes[1];
         this.mida_louvain = sizes[2];
         
         this.temps_g = times[0];
         this.temps_c = times[1];
-        this.temps_l = times[2];
+        this.temps_l = times[2];*/
     }
 
     //Pre: cert
-    //Post: entra la mida de la solució pels tres algorismes
-    public void afegeix_mida_alg(int[] mida){
-        mida_girvan_newman.add(mida[0]);
+    //Post: entra la mida i el temps de la solució pels tres algorismes
+    public void afegeix_mida_temps(int[] mida, int[] g){
+        /*mida_girvan_newman.add(mida[0]);
         mida_clicke.add(mida[1]);
         mida_louvain.add(mida[2]);
-    }
-
-    //Pre: cert
-    //Post: entra els temps que es tarda en calcular la solució pels tres algorismes
-    public void afegeix_temps_alg(int[] g){
+        
         temps_g.add(g[0]);
         temps_c.add(g[1]);
-        temps_l.add(g[2]);
+        temps_l.add(g[2]);*/
     }
 
     //Pre: cert
     //Post: retorna la mitjana dels temps de girvan Newman guardats
     public int mitj_temps_GN(){
-        Iterator it = temps_g.iterator();
+        /*Iterator it = temps_g.iterator();
         int suma = 0;
         int ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        if (temps_g.size() > 0) ret = suma/(temps_g.size());
-        return ret;
+        if (temps_g.size() > 0) ret = suma/(temps_g.size());*/
+        return 0;
     }
 
 
     //Pre: cert
     //Post: retorna la mitjana dels temps de clicke guardats
     public int mitj_temps_Clicke(){
-        Iterator it = temps_c.iterator();
+        /*Iterator it = temps_c.iterator();
         int suma = 0;
         int ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        if (temps_c.size() > 0) ret = suma/(temps_c.size());
-        return ret;
+        if (temps_c.size() > 0) ret = suma/(temps_c.size());*/
+        return 0;
     }
 
     
     //Pre: cert
     //Post: retorna la mitjana dels temps de louvain guardats
     public int mitj_temps_Louvain(){
-        Iterator it = temps_l.iterator();
+        /*Iterator it = temps_l.iterator();
         int suma = 0;
         int ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        if (temps_l.size() > 0) ret = suma/(temps_l.size());
-        return ret;
+        if (temps_l.size() > 0) ret = suma/(temps_l.size());*/
+        return 0;
     }
     
     
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de girvan Newman guardats
     public double mitj_mida_GN(){
-        Iterator it = mida_girvan_newman.iterator();
+        /*Iterator it = mida_girvan_newman.iterator();
         double suma = 0;
         double ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        if (mida_girvan_newman.size() > 0) ret = suma/(mida_girvan_newman.size());
-        return ret;
+        if (mida_girvan_newman.size() > 0) ret = suma/(mida_girvan_newman.size());*/
+        return 0;
     }
 
     
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de clicke guardats
     public double mitj_mida_Clicke(){
-        Iterator it = mida_clicke.iterator();
+        /*Iterator it = mida_clicke.iterator();
         double suma = 0;
         double ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        if (mida_clicke.size() > 0) ret = suma/(mida_clicke.size());
-        return ret;
+        if (mida_clicke.size() > 0) ret = suma/(mida_clicke.size());*/
+        return 0;
     }    
     
     
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de louvain guardats
     public double mitj_mida_Louvain(){
-        Iterator it = mida_louvain.iterator();
+        /*Iterator it = mida_louvain.iterator();
         double suma = 0;
         double ret = 0;
         while (it.hasNext()){
             suma += (int) it.next();
         }
-        if (mida_louvain.size() > 0) ret = suma/(mida_louvain.size());
-        return ret;
+        if (mida_louvain.size() > 0) ret = suma/(mida_louvain.size());*/
+        return 0;
     }
 
 
     //Pre: cert
     //Post: retorna el nom de l’algorisme més rapid per la última solució
     public String rapid(){
-        DecimalFormat df = new DecimalFormat("0.00");
+        /*DecimalFormat df = new DecimalFormat("0.00");
         double midaG = 0, midaC = 0, midaL = 0, timeG = 0, timeC = 0, timeL = 0, 
                 vG = 0, vC = 0, vL = 0;
         double fastest;
@@ -173,15 +176,15 @@ public class Estadistica {
         
         if (aux == vG) ret = ret.concat("Girvan Newman\ncon velocidad: " + df.format(vG) + " nodos/msec");
         else if (aux == vC) ret = ret.concat("Clicke\ncon velocidad: " + df.format(vC) + " nodos/msec");
-        else ret = ret.concat("Louvain\ncon velocidad: " + df.format(vL) + " nodos/msec");
+        else ret = ret.concat("Louvain\ncon velocidad: " + df.format(vL) + " nodos/msec");*/
         
-        return ret;
+        return null;
     }
 
     //Pre: cert
     //Post: retorna el nom de l’algorisme la solució del cual ocupa menys espai per la última solució
     public String petit(){
-        int midaG = 0, midaC = 0, midaL = 0;
+        /*int midaG = 0, midaC = 0, midaL = 0;
         DecimalFormat df = new DecimalFormat("0.00");
         String ret = "L'algorisme que menys ocupa es ";
         
@@ -200,15 +203,15 @@ public class Estadistica {
 
         if (aux == midaG) ret = ret.concat("Girvan Newman\namb: " + df.format(midaG) + " nodes");
         else if (aux == midaC) ret = ret.concat("Clicke\namb: " + df.format(midaC) + " nodes");
-        else ret = ret.concat("Louvain\namb: " + df.format(midaL) + " nodes");
+        else ret = ret.concat("Louvain\namb: " + df.format(midaL) + " nodes");*/
         
-        return ret;
+        return null;
     }
 
     
     
     public Object[] getSizesTimes(){
-        Object[] ob = new Object[2];
+        /*Object[] ob = new Object[2];
         ArrayList<Integer>[] listaSizes = new ArrayList[3];
         ArrayList<Integer>[] listaTimes = new ArrayList[3];
         
@@ -221,19 +224,19 @@ public class Estadistica {
         listaTimes[2] = temps_l;
         
         ob[0] = listaSizes;
-        ob[1] = listaTimes;
-        return ob;
+        ob[1] = listaTimes;*/
+        return null;
     }
     
     
     public void setSizesTimes(ArrayList<Integer>[] sizes, ArrayList<Integer>[] times){
-        this.mida_girvan_newman = sizes[0];
+        /*this.mida_girvan_newman = sizes[0];
         this.mida_clicke = sizes[1];
         this.mida_louvain = sizes[2];
         
         this.temps_g = times[0];
         this.temps_c = times[1];
-        this.temps_l = times[2];
+        this.temps_l = times[2];*/
     }
     
 

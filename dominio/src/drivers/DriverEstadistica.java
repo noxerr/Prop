@@ -22,8 +22,7 @@ public class DriverEstadistica {
         int[] g = new int [3];
         mida[0] = 10; mida[1] = 15; mida[2] = 8;
         g[0] = 5; g[1] = 4; g[2] = 150;
-        CtrlEstadistica.afegeix_mida_alg(mida);
-        CtrlEstadistica.afegeix_temps_alg(g);
+        CtrlEstadistica.afegeix_mida_temps(mida, g);
         
         System.out.println(CtrlEstadistica.rapid());
         System.out.println(CtrlEstadistica.petit());
