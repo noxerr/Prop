@@ -20,8 +20,8 @@ public class VistaPlantilla extends javax.swing.JFrame {
      */
     public VistaPlantilla() {
         initComponents();
-        //CtrlPlantilla.cargarListaPlantillas();
-        afegirCombo(CtrlPlantilla.cargarListaPlantillas());
+        CtrlPlantilla.cargarPlantillas();
+        afegirCombo(CtrlPlantilla.mostrarListaPlantillas());
         jComboBox1.addItem("netbeans");
         //jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mecanica", "Electrica", "Industrial", "Informatica", "Sist_Electronics", "Disseny" }));
     }

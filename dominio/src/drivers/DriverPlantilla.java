@@ -89,7 +89,7 @@ public class DriverPlantilla {
         
         
         //CALCUL AFINITAT
-        int retur = CtrlPlantilla.calculAfinitat(listaPond);
+        int retur = CtrlPlantilla.calculAfinitat(listaPond, "default");
         //deberia dar 204 (0*0 + 1*1 + 2*2 + 3*3.. +8*8 xk las ponderaciones las he puesto
         //de 0 a 8 y las coincidencias de eventos tambien
         System.out.println("La afinitat dels dos diputats es de: " + retur);
