@@ -20,18 +20,9 @@ public class CtrlEstadistica {
     private static Estadistica estadistica;
     
     public static void initEstadistica() throws IOException{
-        Object[] ret = CtrlPersistenciaEstadistica.cargarEstadistica();
-        ArrayList<Integer>[] sizes = (ArrayList<Integer>[]) ret[0];
-        ArrayList<Integer>[] times = (ArrayList<Integer>[]) ret[1];
-        estadistica = new Estadistica(sizes, times);
+        ArrayList<ArrayList<String>>[] all = CtrlPersistenciaEstadistica.cargarEstadistica();
+        estadistica = new Estadistica(all);
     }
-    
-    /*public static void cargarEstadistica() throws IOException{
-        Object[] ret = CtrlPersistenciaEstadistica.cargarEstadistica();
-        ArrayList<Integer>[] sizes = (ArrayList<Integer>[]) ret[0];
-        ArrayList<Integer>[] times = (ArrayList<Integer>[]) ret[1];
-        estadistica.setSizesTimes(sizes, times);
-    }*/
     
     
     public static void resetearEstadisticas(){

@@ -6,16 +6,11 @@
 
 package dominio;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ListIterator;
 
 /**
  *
@@ -33,13 +28,11 @@ public class Estadistica {
         mapaLouvain = new HashMap();
     }
     
-    public Estadistica(ArrayList<Integer>[] sizes, ArrayList<Integer>[] times){
-        mapaNewman = new HashMap();
-        mapaClicke = new HashMap();
-        mapaLouvain = new HashMap(); 
-        //ObjectOutputStream oos = new ObjectOutputStream(new OutputStream(String auxi));
-        
-        //oos.writeObject(hashmap);
+    public Estadistica(ArrayList<ArrayList<String>>[] all) throws IOException{
+        HashMap<Integer, int[]>[] maps = convertFromString(all);
+        mapaNewman = maps[0];
+        mapaClicke = maps[1];
+        mapaLouvain = maps[2];
     }
 
     //Pre: cert
@@ -58,37 +51,39 @@ public class Estadistica {
             sd[1] = 1;
             sd[2] = (temps[0]*temps[0]);
             mapaNewman.put(mida[0], sd);
-            System.out.println("sd 0: " + sd[0]);
+            //System.out.println("sd 0: " + sd[0]);
         }
         
         //clicke
         sd = new int[3];
-        if (!mapaClicke.isEmpty() && mapaClicke.containsKey(mida[0])) {
-            sd = mapaClicke.get(mida[0]);
-            sd[0] += temps[0];
+        if (!mapaClicke.isEmpty() && mapaClicke.containsKey(mida[1])) {
+            sd = mapaClicke.get(mida[1]);
+            sd[0] += temps[1];
             sd[1]++;
-            sd[2] = (temps[0]*temps[0]);
+            sd[2] = (temps[1]*temps[1]);
         }
         else{
-            sd[0] = temps[0];
+            sd[0] = temps[1];
             sd[1] = 1;
-            sd[2] = (temps[0]*temps[0]);
-            mapaClicke.put(mida[0], sd);
+            sd[2] = (temps[1]*temps[1]);
+            mapaClicke.put(mida[1], sd);
+            //System.out.println("sd 0: " + sd[1]);
         }
         
         //louvain
         sd = new int[3];
-        if (!mapaLouvain.isEmpty() && mapaLouvain.containsKey(mida[0])) {
-            sd = mapaLouvain.get(mida[0]);
-            sd[0] += temps[0];
+        if (!mapaLouvain.isEmpty() && mapaLouvain.containsKey(mida[2])) {
+            sd = mapaLouvain.get(mida[2]);
+            sd[0] += temps[2];
             sd[1]++;
-            sd[2] = (temps[0]*temps[0]);
+            sd[2] = (temps[2]*temps[2]);
         }
         else{
-            sd[0] = temps[0];
+            sd[0] = temps[2];
             sd[1] = 1;
-            sd[2] = (temps[0]*temps[0]);
-            mapaLouvain.put(mida[0], sd);
+            sd[2] = (temps[2]*temps[2]);
+            mapaLouvain.put(mida[2], sd);
+            //System.out.println("sd 0: " + sd[2]);
         }
     }
 
@@ -248,33 +243,86 @@ public class Estadistica {
         a0[0] = convertToString(mapaNewman);
         a0[1] = convertToString(mapaClicke);
         a0[2] = convertToString(mapaLouvain);
-        
+        /*HashMap<Integer, int[]>[] maps = convertFromString(a0);
+        int[] rr = maps[0].get(10);
+        System.out.println(rr[0]);
+        System.out.println("mapa0: " + maps[0]);*/        
         return a0;
     }
     
     private ArrayList<ArrayList<String>> convertToString(HashMap<Integer, int[]> object) throws IOException {
         ArrayList<ArrayList<String>> ret = new ArrayList();
+        ArrayList<String> fila;
+        System.out.println("filas: ");
         for (int i : object.keySet()){
-            
+            fila = new ArrayList();
+            fila.add(String.valueOf(i));
+            for (int j : object.get(i)){
+                fila.add(String.valueOf(j));
+            }
+            ret.add(fila);
+            System.out.println(fila);
         }
         return ret;
     }
     
-    private HashMap<Integer, int[]> convertFromString(byte[] value) throws IOException, ClassNotFoundException {
-        try (InputStream is = new ByteArrayInputStream(value);
-            ObjectInputStream ois = new ObjectInputStream(is)) {
-            return (HashMap<Integer, int[]>) ois.readObject();
+    private HashMap<Integer, int[]>[] convertFromString(ArrayList<ArrayList<String>>[] value) throws IOException {
+        HashMap<Integer, int[]>[] ret = new HashMap[3];
+        ret[0] = new HashMap();
+        ret[1] = new HashMap();
+        ret[2] = new HashMap();
+        ArrayList<ArrayList<String>> map0 = value[0];
+        ArrayList<ArrayList<String>> map1 = value[1];
+        ArrayList<ArrayList<String>> map2 = value[2];
+        ListIterator l0 = map0.listIterator();
+        ListIterator l1 = map1.listIterator();
+        ListIterator l2 = map2.listIterator();
+        ListIterator lAux;
+        if (!map0.isEmpty()){
+            while (l0.hasNext()){
+                int[] i = new int[3];
+                int iAux;
+                ArrayList<String> aux0 = (ArrayList<String>) l0.next();
+                lAux = aux0.listIterator();
+                iAux = Integer.valueOf((String) lAux.next());
+                i[0] = Integer.valueOf((String) lAux.next());
+                i[1] = Integer.valueOf((String) lAux.next());
+                i[2] = Integer.valueOf((String) lAux.next());
+                ret[0].put(iAux, i);
+            }
+            
+            while (l1.hasNext()){
+                int[] i = new int[3];
+                int iAux;
+                ArrayList<String> aux1 = (ArrayList<String>) l1.next();
+                lAux = aux1.listIterator();
+                iAux = Integer.valueOf((String) lAux.next());
+                i[0] = Integer.valueOf((String) lAux.next());
+                i[1] = Integer.valueOf((String) lAux.next());
+                i[2] = Integer.valueOf((String) lAux.next());
+                ret[1].put(iAux, i);
+            }
+            
+            while (l2.hasNext()){
+                int[] i = new int[3];
+                int iAux;
+                ArrayList<String> aux2 = (ArrayList<String>) l2.next();
+                lAux = aux2.listIterator();
+                iAux = Integer.valueOf((String) lAux.next());
+                i[0] = Integer.valueOf((String) lAux.next());
+                i[1] = Integer.valueOf((String) lAux.next());
+                i[2] = Integer.valueOf((String) lAux.next());
+                ret[2].put(iAux, i);
+            }
         }
+        return ret;
     }
     
-    public void setSizesTimes(ArrayList<Integer>[] sizes, ArrayList<Integer>[] times){
-        /*this.mida_girvan_newman = sizes[0];
-        this.mida_clicke = sizes[1];
-        this.mida_louvain = sizes[2];
-        
-        this.temps_g = times[0];
-        this.temps_c = times[1];
-        this.temps_l = times[2];*/
+    public void setSizesTimes(ArrayList<ArrayList<String>>[] a) throws IOException{
+        HashMap<Integer, int[]>[] maps = convertFromString(a);
+        mapaNewman = maps[0];
+        mapaClicke = maps[1];
+        mapaLouvain = maps[2];
     }
     
 
