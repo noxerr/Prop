@@ -6,57 +6,90 @@
 
 package dominio;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import javafx.util.Pair;
 
 /**
  *
  * @author dani__000
  */
 public class Estadistica {
-    //the pair contains: num veces rep : integer, t total : integer
-    private HashMap<Integer, StrucDatos> mapaNewman;
-    private HashMap<Integer, StrucDatos> mapaClicke;
-    private HashMap<Integer, StrucDatos> mapaLouvain;
-    private ArrayList<Integer> mida_girvan_newman, mida_clicke, mida_louvain, temps_g, temps_c, temps_l;
+    //el int tiene: T total : integer, n veces repe : integer, sumaTiCuadrado : integer
+    private HashMap<Integer, int[]> mapaNewman, mapaClicke, mapaLouvain;
     
     //Pre: cert
     //Post: crea una estadistica
     public Estadistica(){
-        /*mida_girvan_newman = new ArrayList(); 
-        mida_clicke = new ArrayList(); 
-        mida_louvain = new ArrayList();
-        temps_g = new ArrayList();
-        temps_c = new ArrayList();
-        temps_l = new ArrayList();*/
         mapaNewman = new HashMap();
         mapaClicke = new HashMap();
         mapaLouvain = new HashMap();
     }
     
     public Estadistica(ArrayList<Integer>[] sizes, ArrayList<Integer>[] times){
-        /*this.mida_girvan_newman = sizes[0];
-        this.mida_clicke = sizes[1];
-        this.mida_louvain = sizes[2];
+        mapaNewman = new HashMap();
+        mapaClicke = new HashMap();
+        mapaLouvain = new HashMap(); 
+        //ObjectOutputStream oos = new ObjectOutputStream(new OutputStream(String auxi));
         
-        this.temps_g = times[0];
-        this.temps_c = times[1];
-        this.temps_l = times[2];*/
+        //oos.writeObject(hashmap);
     }
 
     //Pre: cert
     //Post: entra la mida i el temps de la solució pels tres algorismes
-    public void afegeix_mida_temps(int[] mida, int[] g){
-        /*mida_girvan_newman.add(mida[0]);
-        mida_clicke.add(mida[1]);
-        mida_louvain.add(mida[2]);
+    public void afegeix_mida_temps(int[] mida, int[] temps){
+        //newman
+        int[] sd = new int[3];
+        if (!mapaNewman.isEmpty() && mapaNewman.containsKey(mida[0])) {
+            sd = mapaNewman.get(mida[0]);
+            sd[0] += temps[0];
+            sd[1]++;
+            sd[2] = (temps[0]*temps[0]);
+        }
+        else{
+            sd[0] = temps[0];
+            sd[1] = 1;
+            sd[2] = (temps[0]*temps[0]);
+            mapaNewman.put(mida[0], sd);
+            System.out.println("sd 0: " + sd[0]);
+        }
         
-        temps_g.add(g[0]);
-        temps_c.add(g[1]);
-        temps_l.add(g[2]);*/
+        //clicke
+        sd = new int[3];
+        if (!mapaClicke.isEmpty() && mapaClicke.containsKey(mida[0])) {
+            sd = mapaClicke.get(mida[0]);
+            sd[0] += temps[0];
+            sd[1]++;
+            sd[2] = (temps[0]*temps[0]);
+        }
+        else{
+            sd[0] = temps[0];
+            sd[1] = 1;
+            sd[2] = (temps[0]*temps[0]);
+            mapaClicke.put(mida[0], sd);
+        }
+        
+        //louvain
+        sd = new int[3];
+        if (!mapaLouvain.isEmpty() && mapaLouvain.containsKey(mida[0])) {
+            sd = mapaLouvain.get(mida[0]);
+            sd[0] += temps[0];
+            sd[1]++;
+            sd[2] = (temps[0]*temps[0]);
+        }
+        else{
+            sd[0] = temps[0];
+            sd[1] = 1;
+            sd[2] = (temps[0]*temps[0]);
+            mapaLouvain.put(mida[0], sd);
+        }
     }
 
     //Pre: cert
@@ -210,24 +243,29 @@ public class Estadistica {
 
     
     
-    public Object[] getSizesTimes(){
-        /*Object[] ob = new Object[2];
-        ArrayList<Integer>[] listaSizes = new ArrayList[3];
-        ArrayList<Integer>[] listaTimes = new ArrayList[3];
+    public ArrayList<ArrayList<String>>[] getMaps() throws IOException{
+        ArrayList<ArrayList<String>>[] a0 = new ArrayList[3];
+        a0[0] = convertToString(mapaNewman);
+        a0[1] = convertToString(mapaClicke);
+        a0[2] = convertToString(mapaLouvain);
         
-        listaSizes[0] = mida_girvan_newman;
-        listaSizes[1] = mida_clicke;
-        listaSizes[2] = mida_louvain;
-        
-        listaTimes[0] = temps_g;
-        listaTimes[1] = temps_c;
-        listaTimes[2] = temps_l;
-        
-        ob[0] = listaSizes;
-        ob[1] = listaTimes;*/
-        return null;
+        return a0;
     }
     
+    private ArrayList<ArrayList<String>> convertToString(HashMap<Integer, int[]> object) throws IOException {
+        ArrayList<ArrayList<String>> ret = new ArrayList();
+        for (int i : object.keySet()){
+            
+        }
+        return ret;
+    }
+    
+    private HashMap<Integer, int[]> convertFromString(byte[] value) throws IOException, ClassNotFoundException {
+        try (InputStream is = new ByteArrayInputStream(value);
+            ObjectInputStream ois = new ObjectInputStream(is)) {
+            return (HashMap<Integer, int[]>) ois.readObject();
+        }
+    }
     
     public void setSizesTimes(ArrayList<Integer>[] sizes, ArrayList<Integer>[] times){
         /*this.mida_girvan_newman = sizes[0];

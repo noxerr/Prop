@@ -38,10 +38,10 @@ public class CtrlEstadistica {
         CtrlPersistenciaEstadistica.resetearEstadistica();
         estadistica = new Estadistica();
     }
-    
+     
     
     public static void guardarEstadistica() throws IOException{
-        Object[] ob = estadistica.getSizesTimes();
+        ArrayList<ArrayList<String>>[] ob = estadistica.getMaps();
         CtrlPersistenciaEstadistica.guardarEstadistica(ob);
     }
 

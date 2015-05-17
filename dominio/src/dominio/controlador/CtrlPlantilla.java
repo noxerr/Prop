@@ -71,7 +71,6 @@ public class CtrlPlantilla {
         int[] pond = new int[9];
         String nom;
         int n;
-        Plantilla p;
         while (l1.hasNext()){
             l2 = ((ArrayList<String>) l1.next()).listIterator();
             n = 0;
@@ -81,8 +80,7 @@ public class CtrlPlantilla {
                 n++;
             }
             ponder(pond);
-            p = new Plantilla(nom,pond);
-            map.put(nom, p);
+            map.put(nom, new Plantilla(nom,pond));
         }
         for (String v : map.keySet()){
             if (!listaPlantillas.contains(v)) listaPlantillas.add(v);

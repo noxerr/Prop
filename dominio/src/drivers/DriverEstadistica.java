@@ -31,5 +31,7 @@ public class DriverEstadistica {
         System.out.println("mida mitja Clicke: " + CtrlEstadistica.mitj_mida_Clicke());
         System.out.println("mida mitja Clicke: " + CtrlEstadistica.mitj_mida_Clicke());
         System.out.println("mida mitja Louvain: " + CtrlEstadistica.mitj_mida_Louvain());
+        
+        CtrlEstadistica.guardarEstadistica();
     }
 }
