@@ -40,11 +40,11 @@ public class Estadistica {
     public void afegeix_mida_temps(int[] mida, int[] temps){
         //newman
         int[] sd = new int[3];
-        if (!mapaNewman.isEmpty() && mapaNewman.containsKey(mida[0])) {
+        if (mapaNewman.containsKey(mida[0])) {
             sd = mapaNewman.get(mida[0]);
             sd[0] += temps[0];
             sd[1]++;
-            sd[2] = (temps[0]*temps[0]);
+            sd[2] += (temps[0]*temps[0]);
         }
         else{
             sd[0] = temps[0];
@@ -56,11 +56,11 @@ public class Estadistica {
         
         //clicke
         sd = new int[3];
-        if (!mapaClicke.isEmpty() && mapaClicke.containsKey(mida[1])) {
+        if (mapaClicke.containsKey(mida[1])) {
             sd = mapaClicke.get(mida[1]);
             sd[0] += temps[1];
             sd[1]++;
-            sd[2] = (temps[1]*temps[1]);
+            sd[2] += (temps[1]*temps[1]);
         }
         else{
             sd[0] = temps[1];
@@ -72,11 +72,11 @@ public class Estadistica {
         
         //louvain
         sd = new int[3];
-        if (!mapaLouvain.isEmpty() && mapaLouvain.containsKey(mida[2])) {
+        if (mapaLouvain.containsKey(mida[2])) {
             sd = mapaLouvain.get(mida[2]);
             sd[0] += temps[2];
             sd[1]++;
-            sd[2] = (temps[2]*temps[2]);
+            sd[2] += (temps[2]*temps[2]);
         }
         else{
             sd[0] = temps[2];
@@ -90,42 +90,42 @@ public class Estadistica {
     //Pre: cert
     //Post: retorna la mitjana dels temps de girvan Newman guardats
     public int mitj_temps_GN(){
-        /*Iterator it = temps_g.iterator();
-        int suma = 0;
-        int ret = 0;
-        while (it.hasNext()){
-            suma += (int) it.next();
+        int n = 0, TTotal = 0;
+        int[] vec;
+        for (int v : mapaNewman.keySet()){
+            vec = mapaNewman.get(v);
+            n += vec[1];
+            TTotal += vec[0];
         }
-        if (temps_g.size() > 0) ret = suma/(temps_g.size());*/
-        return 0;
+        return (TTotal/n);
     }
 
 
     //Pre: cert
     //Post: retorna la mitjana dels temps de clicke guardats
     public int mitj_temps_Clicke(){
-        /*Iterator it = temps_c.iterator();
-        int suma = 0;
-        int ret = 0;
-        while (it.hasNext()){
-            suma += (int) it.next();
+        int n = 0, TTotal = 0;
+        int[] vec;
+        for (int v : mapaClicke.keySet()){
+            vec = mapaClicke.get(v);
+            n += vec[1];
+            TTotal += vec[0];
         }
-        if (temps_c.size() > 0) ret = suma/(temps_c.size());*/
-        return 0;
+        return (TTotal/n);
     }
 
     
     //Pre: cert
     //Post: retorna la mitjana dels temps de louvain guardats
     public int mitj_temps_Louvain(){
-        /*Iterator it = temps_l.iterator();
-        int suma = 0;
-        int ret = 0;
-        while (it.hasNext()){
-            suma += (int) it.next();
+        int n = 0, TTotal = 0;
+        int[] vec;
+        for (int v : mapaLouvain.keySet()){
+            vec = mapaLouvain.get(v);
+            n += vec[1];
+            TTotal += vec[0];
         }
-        if (temps_l.size() > 0) ret = suma/(temps_l.size());*/
-        return 0;
+        return (TTotal/n);
     }
     
     
@@ -274,11 +274,11 @@ public class Estadistica {
         ArrayList<ArrayList<String>> map0 = value[0];
         ArrayList<ArrayList<String>> map1 = value[1];
         ArrayList<ArrayList<String>> map2 = value[2];
-        ListIterator l0 = map0.listIterator();
-        ListIterator l1 = map1.listIterator();
-        ListIterator l2 = map2.listIterator();
-        ListIterator lAux;
-        if (!map0.isEmpty()){
+        if ((map0 != null) && (!map0.isEmpty())){
+            ListIterator l0 = map0.listIterator();
+            ListIterator l1 = map1.listIterator();
+            ListIterator l2 = map2.listIterator();
+            ListIterator lAux;
             while (l0.hasNext()){
                 int[] i = new int[3];
                 int iAux;

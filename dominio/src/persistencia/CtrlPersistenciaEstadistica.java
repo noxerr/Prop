@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 public class CtrlPersistenciaEstadistica {
     public static ArrayList<ArrayList<String>>[] cargarEstadistica() throws IOException{
-        ArrayList<ArrayList<String>>[] ob = new ArrayList[2];
+        ArrayList<ArrayList<String>>[] ob = new ArrayList[3];
         ArrayList<String>[] sizes = new ArrayList[3];
         sizes[0] = new ArrayList<>(Arrays.asList("2", "2", "5"));
         sizes[1] = new ArrayList<>(Arrays.asList("4", "1", "3"));
