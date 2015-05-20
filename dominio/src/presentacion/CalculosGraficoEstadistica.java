@@ -27,8 +27,9 @@ public class CalculosGraficoEstadistica {
     private static final long serialVersionUID = 1L;
 
     private static XYDataset createDataset() {
-        YIntervalSeries series1 = new YIntervalSeries("Series 1");
-        YIntervalSeries series2 = new YIntervalSeries("Series 2");
+        YIntervalSeries series1 = new YIntervalSeries("Newman");
+        YIntervalSeries series2 = new YIntervalSeries("Clicke");
+        YIntervalSeries series3 = new YIntervalSeries("Louvain");
         double d = 100D;
         double d1 = 100D;
         for (int i = 0; i <= 100; i++) {
@@ -39,10 +40,14 @@ public class CalculosGraficoEstadistica {
             double d3 = 0.070000000000000007D * (double) i;
             series2.add(i, d1, d1 - d3, d1 + d3);
         }
+        series3.add(25, 90, 85, 94);
+        series3.add(26, 93, 85, 94);
+        series3.add(27, 92, 85, 94);
 
         YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
         dataset.addSeries(series1);
         dataset.addSeries(series2);
+        dataset.addSeries(series3);
         return dataset;
     }
 
@@ -56,10 +61,11 @@ public class CalculosGraficoEstadistica {
         plot.setRangeGridlinePaint(Color.white);
         DeviationRenderer renderer = new DeviationRenderer(true, false);
         renderer.setSeriesStroke(0, new BasicStroke(3F, 1, 1));
-        renderer.setSeriesStroke(0, new BasicStroke(3F, 1, 1));
         renderer.setSeriesStroke(1, new BasicStroke(3F, 1, 1));
+        renderer.setSeriesStroke(2, new BasicStroke(3F, 1, 1));
         renderer.setSeriesFillPaint(0, new Color(255, 200, 200));
         renderer.setSeriesFillPaint(1, new Color(200, 200, 255));
+        renderer.setSeriesFillPaint(2, new Color(200, 255, 200));
         plot.setRenderer(renderer);
         //
         NumberAxis valueAxis = (NumberAxis) plot.getRangeAxis();
