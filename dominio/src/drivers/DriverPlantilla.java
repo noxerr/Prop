@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Scanner;
 import persistencia.Persistencia;
 import presentacion.NewJFrame;
-import presentacion.VistaParlament;
 
 /**
  *

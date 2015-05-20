@@ -17,7 +17,7 @@ import java.util.ListIterator;
  * @author dani__000
  */
 public class Estadistica {
-    //el int tiene: T total : integer, n veces repe : integer, sumaTiCuadrado : integer
+    //el int tiene: T total, n veces repe, sumaTiCuadrado : integer
     private HashMap<Integer, int[]> mapaNewman, mapaClicke, mapaLouvain;
     
     //Pre: cert
@@ -132,42 +132,48 @@ public class Estadistica {
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de girvan Newman guardats
     public double mitj_mida_GN(){
-        /*Iterator it = mida_girvan_newman.iterator();
-        double suma = 0;
-        double ret = 0;
-        while (it.hasNext()){
-            suma += (int) it.next();
+        int n = 0;
+        double n2 = 0, TamanyTotal = 0;
+        int[] vec;
+        for (int v : mapaLouvain.keySet()){
+            vec = mapaLouvain.get(v);
+            n += vec[1];
+            TamanyTotal += v;
         }
-        if (mida_girvan_newman.size() > 0) ret = suma/(mida_girvan_newman.size());*/
-        return 0;
+        n2 = n;
+        return (TamanyTotal/n2);
     }
 
     
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de clicke guardats
     public double mitj_mida_Clicke(){
-        /*Iterator it = mida_clicke.iterator();
-        double suma = 0;
-        double ret = 0;
-        while (it.hasNext()){
-            suma += (int) it.next();
+        int n = 0;
+        double n2 = 0, TamanyTotal = 0;
+        int[] vec;
+        for (int v : mapaClicke.keySet()){
+            vec = mapaClicke.get(v);
+            n += vec[1];
+            TamanyTotal += v;
         }
-        if (mida_clicke.size() > 0) ret = suma/(mida_clicke.size());*/
-        return 0;
+        n2 = n;
+        return (TamanyTotal/n2);
     }    
     
     
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de louvain guardats
     public double mitj_mida_Louvain(){
-        /*Iterator it = mida_louvain.iterator();
-        double suma = 0;
-        double ret = 0;
-        while (it.hasNext()){
-            suma += (int) it.next();
+        int n = 0;
+        double n2 = 0, TamanyTotal = 0;
+        int[] vec;
+        for (int v : mapaLouvain.keySet()){
+            vec = mapaLouvain.get(v);
+            n += vec[1];
+            TamanyTotal += v;
         }
-        if (mida_louvain.size() > 0) ret = suma/(mida_louvain.size());*/
-        return 0;
+        n2 = n;
+        return (TamanyTotal/n2);
     }
 
 

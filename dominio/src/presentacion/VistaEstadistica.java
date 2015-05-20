@@ -6,6 +6,7 @@
 
 package presentacion;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Panel;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import org.jfree.ui.RefineryUtilities;
 
 
 
@@ -25,12 +27,19 @@ import javax.swing.JLabel;
  */
 public class VistaEstadistica extends javax.swing.JFrame {
     Image img;
+    private boolean loadPhoto = true;
     /**
      * Creates new form VistaEstadistica
      */
     public VistaEstadistica() {
         img = null;
+        try { //C:\\Users\\dani__000\\Desktop\\PRPROP\\dominio\\
+            img = ImageIO.read(new File("grafico2.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(VistaEstadistica.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
+        RefineryUtilities.centerFrameOnScreen(this);
     }
 
     /**
@@ -48,12 +57,9 @@ public class VistaEstadistica extends javax.swing.JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(img, 0, 0, null);
+                if(loadPhoto) g.drawImage(img, 0, 0, null);
             }
         };
-        jLabel1 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setText("Actualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -64,23 +70,15 @@ public class VistaEstadistica extends javax.swing.JFrame {
 
         jButton2.setText("Resetear Estadisticas");
 
-        jLabel1.setText("jLabel1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jLabel1)
-                .addContainerGap(289, Short.MAX_VALUE))
+            .addGap(0, 556, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 413, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,7 +101,7 @@ public class VistaEstadistica extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -114,12 +112,7 @@ public class VistaEstadistica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try { //C:\\Users\\dani__000\\Desktop\\PRPROP\\dominio\\
-            img = ImageIO.read(new File("grafico2.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(VistaEstadistica.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        jPanel1.repaint();
+        CalculosGraficoEstadistica.crearGrafico(jPanel1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -130,7 +123,6 @@ public class VistaEstadistica extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
