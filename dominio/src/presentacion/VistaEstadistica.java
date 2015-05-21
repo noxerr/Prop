@@ -66,6 +66,11 @@ public class VistaEstadistica extends javax.swing.JFrame {
         });
 
         jButton2.setText("Resetear Estadisticas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,6 +121,15 @@ public class VistaEstadistica extends javax.swing.JFrame {
             Logger.getLogger(VistaEstadistica.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        CtrlPresentacionEstadistica.resetStatics();
+        try {
+            CtrlPresentacionEstadistica.crearGrafico(jPanel1);
+        } catch (Exception ex) {
+            Logger.getLogger(VistaEstadistica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     /**

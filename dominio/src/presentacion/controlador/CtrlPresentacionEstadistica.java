@@ -29,6 +29,11 @@ public class CtrlPresentacionEstadistica {
 
     private static final long serialVersionUID = 1L;
 
+    public static void resetStatics(){
+        CtrlEstadistica.resetearEstadisticas();
+    }
+    
+    
     private static XYDataset createDataset() throws Exception {
         YIntervalSeries series1 = new YIntervalSeries("Newman");
         YIntervalSeries series2 = new YIntervalSeries("Clicke");
