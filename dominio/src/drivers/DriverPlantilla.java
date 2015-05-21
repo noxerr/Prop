@@ -7,6 +7,7 @@
 package drivers;
 
 import dominio.Plantilla;
+import dominio.controlador.CtrlEstadistica;
 import dominio.controlador.CtrlPlantilla;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -175,7 +176,7 @@ public class DriverPlantilla {
         ArrayList<String> ar = new ArrayList();
         Persistencia.guardarDisco(ar, "hola2.txt", ret);
         Persistencia.cargarDisco("hola2.txt", ret);
-        
+        CtrlEstadistica.initEstadistica();
         new NewJFrame().setVisible(true);
         
         Map<String,Plantilla> mapaPlantillas = CtrlPlantilla.mostarMapaPlantillas();

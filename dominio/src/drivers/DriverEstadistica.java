@@ -6,7 +6,9 @@
 
 package drivers;
 
+import com.sun.media.jfxmedia.events.NewFrameEvent;
 import dominio.controlador.CtrlEstadistica;
+import presentacion.NewJFrame;
 
 /**
  *
@@ -40,5 +42,6 @@ public class DriverEstadistica {
         CtrlEstadistica.guardarEstadistica();
         CtrlEstadistica.mitj_mida_Louvain();
         CtrlEstadistica.getXYAlg(0);
+        new NewJFrame().setVisible(true);
     }
 }

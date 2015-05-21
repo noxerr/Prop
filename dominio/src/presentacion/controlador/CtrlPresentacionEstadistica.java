@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,19 +34,24 @@ public class CtrlPresentacionEstadistica {
         YIntervalSeries series2 = new YIntervalSeries("Clicke");
         YIntervalSeries series3 = new YIntervalSeries("Louvain");
         ArrayList<Double>[] newman = CtrlEstadistica.getXYAlg(0);
+        if (newman == null) System.out.println("es null");
+        ListIterator l1, l2, l3, l4;
         double d = 100D;
         double d1 = 100D;
-        for (int i = 0; i <= 100; i++) {
+        /*for (int i = 0; i <= 100; i++) {
             d = (d + Math.random()) - 0.47999999999999998D;
             double d2 = 0.050000000000000003D * (double) i;
             series1.add(i, d, d - d2, d + d2);
             d1 = (d1 + Math.random()) - 0.5D;
             double d3 = 0.070000000000000007D * (double) i;
-            series2.add(i, d1, d1 - d3, d1 + d3);
+            series3.add(i, d1, d1 - d3, d1 + d3);
+        }*/
+        l1 = newman[0].listIterator(); l2 = newman[1].listIterator();
+        l3 = newman[2].listIterator(); l4 = newman[3].listIterator();
+        while (l1.hasNext()){
+            series1.add((double) l1.next(), (double) l2.next(), 
+                    (double) l3.next(), (double) l4.next());
         }
-        series3.add(25, 90, 85, 94);
-        series3.add(26, 93, 85, 94);
-        series3.add(27, 92, 85, 94);
 
         YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
         dataset.addSeries(series1);
