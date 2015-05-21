@@ -1,9 +1,11 @@
-package presentacion;
+package presentacion.controlador;
 
+import dominio.controlador.CtrlEstadistica;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,14 +24,15 @@ import org.jfree.data.xy.YIntervalSeries;
 import org.jfree.data.xy.YIntervalSeriesCollection;
 import org.jfree.ui.RectangleInsets;
 
-public class CalculosGraficoEstadistica {
+public class CtrlPresentacionEstadistica {
 
     private static final long serialVersionUID = 1L;
 
-    private static XYDataset createDataset() {
+    private static XYDataset createDataset() throws Exception {
         YIntervalSeries series1 = new YIntervalSeries("Newman");
         YIntervalSeries series2 = new YIntervalSeries("Clicke");
         YIntervalSeries series3 = new YIntervalSeries("Louvain");
+        ArrayList<Double>[] newman = CtrlEstadistica.getXYAlg(0);
         double d = 100D;
         double d1 = 100D;
         for (int i = 0; i <= 100; i++) {
@@ -75,7 +78,7 @@ public class CalculosGraficoEstadistica {
     }
     
     
-    public static void crearGrafico(JPanel GraficoLineas){
+    public static void crearGrafico(JPanel GraficoLineas) throws Exception{
         ChartPanel panel;
         GraficoLineas.removeAll();
         panel = new ChartPanel(createChart(createDataset()));
@@ -86,7 +89,7 @@ public class CalculosGraficoEstadistica {
         try {
             ChartUtilities.saveChartAsJPEG(new File("grafico2.jpg"), createChart(createDataset()), 550, 440);
         } catch (IOException ex) {
-            Logger.getLogger(CalculosGraficoEstadistica.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlPresentacionEstadistica.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -51,7 +51,6 @@ public class Estadistica {
             sd[1] = 1;
             sd[2] = (temps[0]*temps[0]);
             mapaNewman.put(mida[0], sd);
-            //System.out.println("sd 0: " + sd[0]);
         }
         
         //clicke
@@ -67,7 +66,6 @@ public class Estadistica {
             sd[1] = 1;
             sd[2] = (temps[1]*temps[1]);
             mapaClicke.put(mida[1], sd);
-            //System.out.println("sd 0: " + sd[1]);
         }
         
         //louvain
@@ -83,7 +81,6 @@ public class Estadistica {
             sd[1] = 1;
             sd[2] = (temps[2]*temps[2]);
             mapaLouvain.put(mida[2], sd);
-            //System.out.println("sd 0: " + sd[2]);
         }
     }
 
@@ -248,11 +245,7 @@ public class Estadistica {
         ArrayList<ArrayList<String>>[] a0 = new ArrayList[3];
         a0[0] = convertToString(mapaNewman);
         a0[1] = convertToString(mapaClicke);
-        a0[2] = convertToString(mapaLouvain);
-        /*HashMap<Integer, int[]>[] maps = convertFromString(a0);
-        int[] rr = maps[0].get(10);
-        System.out.println(rr[0]);
-        System.out.println("mapa0: " + maps[0]);*/        
+        a0[2] = convertToString(mapaLouvain);     
         return a0;
     }
     
@@ -329,6 +322,40 @@ public class Estadistica {
         mapaNewman = maps[0];
         mapaClicke = maps[1];
         mapaLouvain = maps[2];
+    }
+    
+    //1r array de x, 2o de y, 3o de min y, 4o de max y
+    public ArrayList<Double>[] getXYAlg(int alg) throws Exception{
+        HashMap<Integer, int[]> inMap;
+        ArrayList<Double>[] ret = new ArrayList[4];
+        ret[0] = new ArrayList();
+        ret[1] = new ArrayList();
+        ret[2] = new ArrayList();
+        ret[3] = new ArrayList();
+        switch(alg){
+            case 0: inMap = mapaNewman;
+                    break;
+            case 1: inMap = mapaClicke;
+                    break;
+            case 2: inMap = mapaLouvain;
+                    break;
+            default: throw new Exception("problema en el getXYAlg");
+        }
+        int[] vec;
+        double mean = 0, devMin = 0, devMax, aux = 0, dev, meanSq, aux2;
+        for (int a : inMap.keySet()){
+            ret[0].add(aux + a);
+            vec = inMap.get(a);
+            //convertimos los vec a double trampeando
+            mean = (aux + vec[0])/(aux + vec[1]);
+            ret[1].add(mean);
+            meanSq = mean*mean;
+            aux2 = (aux + vec[2])/(aux + vec[1]);
+            dev = Math.sqrt(aux2-meanSq);
+            ret[2].add(mean-dev);
+            ret[3].add(mean+dev);
+        }
+        return ret;
     }
     
 

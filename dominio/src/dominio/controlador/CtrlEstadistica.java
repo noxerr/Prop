@@ -71,4 +71,8 @@ public class CtrlEstadistica {
     public static String petit(){
         return estadistica.petit();
     }
+    
+    public static ArrayList<Double>[] getXYAlg(int alg) throws Exception{
+        return estadistica.getXYAlg(alg);
+    }
 }

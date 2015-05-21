@@ -24,7 +24,10 @@ public class DriverEstadistica {
         g[0] = 50; g[1] = 4; g[2] = 150;
         CtrlEstadistica.afegeix_mida_temps(mida, g);
         mida[0] = 15; mida[1] = 17; mida[2] = 9;
-        g[0] = 50; g[1] = 4; g[2] = 150;
+        g[0] = 55; g[1] = 4; g[2] = 150;
+        CtrlEstadistica.afegeix_mida_temps(mida, g);
+        mida[0] = 15; mida[1] = 17; mida[2] = 9;
+        g[0] = 60; g[1] = 4; g[2] = 150;
         CtrlEstadistica.afegeix_mida_temps(mida, g);
         
         System.out.println(CtrlEstadistica.rapid());
@@ -36,5 +39,6 @@ public class DriverEstadistica {
         
         CtrlEstadistica.guardarEstadistica();
         CtrlEstadistica.mitj_mida_Louvain();
+        CtrlEstadistica.getXYAlg(0);
     }
 }

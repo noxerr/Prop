@@ -116,13 +116,15 @@ public class CtrlPlantilla {
     
     //Pre: la llista conte les coincidencies en cada event, entre dos diputats
     //Post: retorna l’afinitat entre dip1 i dip2
-    public static int calculAfinitat(int[] lista, String nom){
+    public static int calculAfinitat(int[] lista, String nom) throws Exception{
+        if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         Plantilla p = mapPlantillas.get(nom);
         int ret = p.calculAfinitat(lista);
         return ret;
     }
     
-    public static Object[] getPond(String nom){
+    public static Object[] getPond(String nom) throws Exception{
+        if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         Plantilla p = mapPlantillas.get(nom);
         Object[] ret = p.getPond();
         return ret;
@@ -130,6 +132,7 @@ public class CtrlPlantilla {
     
     public static void modAll(int[] listaPond, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla p = mapPlantillas.get(nom);
             p.modpVotacio(listaPond[0]);
@@ -146,6 +149,7 @@ public class CtrlPlantilla {
     
     public static void modVotacio(int p, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpVotacio(p);
@@ -154,6 +158,7 @@ public class CtrlPlantilla {
     
     public static void modVotacioDif(int p, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpVotacioDif(p);
@@ -162,6 +167,7 @@ public class CtrlPlantilla {
     
     public static void modReunio(int p, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpReunio(p);
@@ -170,6 +176,7 @@ public class CtrlPlantilla {
     
     public static void modConf(int p, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpConf(p);
@@ -178,6 +185,7 @@ public class CtrlPlantilla {
     
     public static void modDinar(int p, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpDinar(p);
@@ -186,6 +194,7 @@ public class CtrlPlantilla {
     
     public static void modLleure(int p, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpLleure(p);
@@ -194,6 +203,7 @@ public class CtrlPlantilla {
     
     public static void modPartit(int p, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpPartit(p);
@@ -202,6 +212,7 @@ public class CtrlPlantilla {
     
     public static void modEdat(int p, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpEdat(p);
@@ -210,6 +221,7 @@ public class CtrlPlantilla {
     
     public static void modReligio(int p, String nom) throws Exception{
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
+        else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpReligio(p);
