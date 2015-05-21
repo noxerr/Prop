@@ -33,23 +33,32 @@ public class CtrlPresentacionEstadistica {
         YIntervalSeries series1 = new YIntervalSeries("Newman");
         YIntervalSeries series2 = new YIntervalSeries("Clicke");
         YIntervalSeries series3 = new YIntervalSeries("Louvain");
-        ArrayList<Double>[] newman = CtrlEstadistica.getXYAlg(0);
-        if (newman == null) System.out.println("es null");
+        ArrayList<Double>[] alg = CtrlEstadistica.getXYAlg(0);
+        if (alg == null) System.out.println("es null");
         ListIterator l1, l2, l3, l4;
-        double d = 100D;
-        double d1 = 100D;
-        /*for (int i = 0; i <= 100; i++) {
-            d = (d + Math.random()) - 0.47999999999999998D;
-            double d2 = 0.050000000000000003D * (double) i;
-            series1.add(i, d, d - d2, d + d2);
-            d1 = (d1 + Math.random()) - 0.5D;
-            double d3 = 0.070000000000000007D * (double) i;
-            series3.add(i, d1, d1 - d3, d1 + d3);
-        }*/
-        l1 = newman[0].listIterator(); l2 = newman[1].listIterator();
-        l3 = newman[2].listIterator(); l4 = newman[3].listIterator();
+        //datos newman
+        l1 = alg[0].listIterator(); l2 = alg[1].listIterator();
+        l3 = alg[2].listIterator(); l4 = alg[3].listIterator();
         while (l1.hasNext()){
             series1.add((double) l1.next(), (double) l2.next(), 
+                    (double) l3.next(), (double) l4.next());
+        }
+        
+        //datos clicke
+        alg = CtrlEstadistica.getXYAlg(1);
+        l1 = alg[0].listIterator(); l2 = alg[1].listIterator();
+        l3 = alg[2].listIterator(); l4 = alg[3].listIterator();
+        while (l1.hasNext()){
+            series2.add((double) l1.next(), (double) l2.next(), 
+                    (double) l3.next(), (double) l4.next());
+        }
+        
+        //datos Louvain
+        alg = CtrlEstadistica.getXYAlg(2);
+        l1 = alg[0].listIterator(); l2 = alg[1].listIterator();
+        l3 = alg[2].listIterator(); l4 = alg[3].listIterator();
+        while (l1.hasNext()){
+            series3.add((double) l1.next(), (double) l2.next(), 
                     (double) l3.next(), (double) l4.next());
         }
 
@@ -65,7 +74,7 @@ public class CtrlPresentacionEstadistica {
         chart.setBackgroundPaint(Color.white);
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setBackgroundPaint(Color.lightGray);
-        plot.setAxisOffset(new RectangleInsets(5D, 5D, 5D, 5D));
+        plot.setAxisOffset(new RectangleInsets(5D, 5D, 5D, 5D)); 
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
         DeviationRenderer renderer = new DeviationRenderer(true, false);
@@ -86,14 +95,15 @@ public class CtrlPresentacionEstadistica {
     
     public static void crearGrafico(JPanel GraficoLineas) throws Exception{
         ChartPanel panel;
+        JFreeChart jFree = createChart(createDataset());
         GraficoLineas.removeAll();
-        panel = new ChartPanel(createChart(createDataset()));
+        panel = new ChartPanel(jFree);
         panel.setBounds(0, 0, 550, 440);
         GraficoLineas.add(panel);
         GraficoLineas.repaint();
 
         try {
-            ChartUtilities.saveChartAsJPEG(new File("grafico2.jpg"), createChart(createDataset()), 550, 440);
+            ChartUtilities.saveChartAsJPEG(new File("grafico2.jpg"), jFree, 550, 440);
         } catch (IOException ex) {
             Logger.getLogger(CtrlPresentacionEstadistica.class.getName()).log(Level.SEVERE, null, ex);
         }
