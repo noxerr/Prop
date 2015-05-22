@@ -16,8 +16,6 @@ import presentacion.NewJFrame;
 public class DriverEstadistica {
     public static void main(String[] args) throws Exception {
         CtrlEstadistica.initEstadistica();
-        System.out.println(CtrlEstadistica.rapid());
-        System.out.println(CtrlEstadistica.petit());
         
         int[] mida = new int[3];
         int[] g = new int [3];
@@ -30,9 +28,6 @@ public class DriverEstadistica {
         mida[0] = 15; mida[1] = 17; mida[2] = 9;
         g[0] = 60; g[1] = 4; g[2] = 150;
         CtrlEstadistica.afegeix_mida_temps(mida, g);
-        
-        System.out.println(CtrlEstadistica.rapid());
-        System.out.println(CtrlEstadistica.petit());
         
         System.out.println("temps mitg GN: " + CtrlEstadistica.mitj_temps_GN());
         System.out.println("mida mitja Clicke: " + CtrlEstadistica.mitj_mida_Clicke());

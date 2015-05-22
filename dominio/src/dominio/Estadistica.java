@@ -86,7 +86,7 @@ public class Estadistica {
 
     //Pre: cert
     //Post: retorna la mitjana dels temps de girvan Newman guardats
-    public int mitj_temps_GN(){
+    public double mitj_temps_GN(){
         int n = 0, TTotal = 0;
         int[] vec;
         for (int v : mapaNewman.keySet()){
@@ -94,13 +94,15 @@ public class Estadistica {
             n += vec[1];
             TTotal += vec[0];
         }
+        System.out.println("entra aki con n: " + n);
+        if (n == 0) n = 1;
         return (TTotal/n);
     }
 
 
     //Pre: cert
     //Post: retorna la mitjana dels temps de clicke guardats
-    public int mitj_temps_Clicke(){
+    public double mitj_temps_Clicke(){
         int n = 0, TTotal = 0;
         int[] vec;
         for (int v : mapaClicke.keySet()){
@@ -108,13 +110,14 @@ public class Estadistica {
             n += vec[1];
             TTotal += vec[0];
         }
+        if (n == 0) n = 1;
         return (TTotal/n);
     }
 
     
     //Pre: cert
     //Post: retorna la mitjana dels temps de louvain guardats
-    public int mitj_temps_Louvain(){
+    public double mitj_temps_Louvain(){
         int n = 0, TTotal = 0;
         int[] vec;
         for (int v : mapaLouvain.keySet()){
@@ -122,6 +125,7 @@ public class Estadistica {
             n += vec[1];
             TTotal += vec[0];
         }
+        if (n == 0) n = 1;
         return (TTotal/n);
     }
     
@@ -137,6 +141,7 @@ public class Estadistica {
             n += vec[1];
             TamanyTotal += v;
         }
+        if (n == 0) n = 1;
         n2 = n;
         return (TamanyTotal/n2);
     }
@@ -153,6 +158,7 @@ public class Estadistica {
             n += vec[1];
             TamanyTotal += v;
         }
+        if (n == 0) n = 1;
         n2 = n;
         return (TamanyTotal/n2);
     }    
@@ -169,78 +175,11 @@ public class Estadistica {
             n += vec[1];
             TamanyTotal += v;
         }
+        if (n == 0) n = 1;
         n2 = n;
         return (TamanyTotal/n2);
     }
 
-
-    //Pre: cert
-    //Post: retorna el nom de l’algorisme més rapid per la última solució
-    public String rapid(){
-        /*DecimalFormat df = new DecimalFormat("0.00");
-        double midaG = 0, midaC = 0, midaL = 0, timeG = 0, timeC = 0, timeL = 0, 
-                vG = 0, vC = 0, vL = 0;
-        double fastest;
-        String ret = "El alg. más rápido es ";
-        if (mida_girvan_newman.size()>0){
-            midaG = mida_girvan_newman.get(mida_girvan_newman.size()-1);
-            timeG = temps_g.get(temps_g.size()-1);
-            vG = midaG/timeG;
-            //System.out.println(df.format(vG));
-            //System.out.println(mida_girvan_newman.get(mida_girvan_newman.size()-1));
-        }
-        if (mida_clicke.size()>0) {
-            midaC = mida_clicke.get(mida_clicke.size()-1);
-            timeC = temps_c.get(temps_c.size()-1);
-            vC = midaC/timeC;
-            //System.out.println(df.format(vC));
-        }
-        if (mida_louvain.size()>0){
-            midaL = mida_louvain.get(mida_louvain.size()-1);
-            timeL = temps_l.get(temps_l.size()-1);
-            vL = midaL/timeL;
-            //System.out.println(df.format(vL));
-        }
-        
-        double aux = Math.max(vG, vC);
-        aux = Math.max(aux, vL);
-        
-        if (aux == vG) ret = ret.concat("Girvan Newman\ncon velocidad: " + df.format(vG) + " nodos/msec");
-        else if (aux == vC) ret = ret.concat("Clicke\ncon velocidad: " + df.format(vC) + " nodos/msec");
-        else ret = ret.concat("Louvain\ncon velocidad: " + df.format(vL) + " nodos/msec");*/
-        
-        return null;
-    }
-
-    //Pre: cert
-    //Post: retorna el nom de l’algorisme la solució del cual ocupa menys espai per la última solució
-    public String petit(){
-        /*int midaG = 0, midaC = 0, midaL = 0;
-        DecimalFormat df = new DecimalFormat("0.00");
-        String ret = "L'algorisme que menys ocupa es ";
-        
-        if (mida_girvan_newman.size()>0){
-            midaG = mida_girvan_newman.get(mida_girvan_newman.size()-1);
-        }
-        if (mida_clicke.size()>0) {
-            midaC = mida_clicke.get(mida_clicke.size()-1);
-        }
-        if (mida_louvain.size()>0){
-            midaL = mida_louvain.get(mida_louvain.size()-1);
-        }
-        
-        int aux = Math.min(midaG, midaC);
-        aux = Math.min(aux, midaL);
-
-        if (aux == midaG) ret = ret.concat("Girvan Newman\namb: " + df.format(midaG) + " nodes");
-        else if (aux == midaC) ret = ret.concat("Clicke\namb: " + df.format(midaC) + " nodes");
-        else ret = ret.concat("Louvain\namb: " + df.format(midaL) + " nodes");*/
-        
-        return null;
-    }
-
-    
-    
     public ArrayList<ArrayList<String>>[] getMaps() throws IOException{
         ArrayList<ArrayList<String>>[] a0 = new ArrayList[3];
         a0[0] = convertToString(mapaNewman);

@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -48,8 +49,16 @@ public class VistaEstadistica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        confirmacioDialog = new javax.swing.JDialog();
+        borrar = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
+        jTextArea1 = new javax.swing.JTextArea();
+        mesInfo = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Actualitzar = new javax.swing.JButton();
+        Reset = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
@@ -57,18 +66,142 @@ public class VistaEstadistica extends javax.swing.JFrame {
                 if(loadPhoto) g.drawImage(img, 0, 0, null);
             }
         };
+        mostrarMes = new javax.swing.JButton();
+        Tornar = new javax.swing.JButton();
 
-        jButton1.setText("Actualizar");
+        borrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        borrar.setText("Esborrar");
+        borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarActionPerformed(evt);
+            }
+        });
+
+        cancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cancel.setText("Cancelar");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        jTextArea1.setRows(2);
+        jTextArea1.setText("   Segur que vols resetejar les estadístiques?\n   El canvi no es pot desfer i no podràs\n   recuperar les estadístiques anteriors.");
+
+        javax.swing.GroupLayout confirmacioDialogLayout = new javax.swing.GroupLayout(confirmacioDialog.getContentPane());
+        confirmacioDialog.getContentPane().setLayout(confirmacioDialogLayout);
+        confirmacioDialogLayout.setHorizontalGroup(
+            confirmacioDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmacioDialogLayout.createSequentialGroup()
+                .addGap(0, 1, Short.MAX_VALUE)
+                .addGroup(confirmacioDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextArea1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmacioDialogLayout.createSequentialGroup()
+                        .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        confirmacioDialogLayout.setVerticalGroup(
+            confirmacioDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(confirmacioDialogLayout.createSequentialGroup()
+                .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(confirmacioDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(borrar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)))
+        );
+
+        mesInfo.setResizable(false);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {" Temps Mitg:", null, null, null},
+                {" Tamany Mitg:", null, null, null},
+                {" V: nodes/ms:", null, null, null}
+            },
+            new String [] {
+                "", "Newman", "Clicke", "Louvain"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setResizingAllowed(false);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        DecimalFormat df = new DecimalFormat("0.00");
+        double[] valores = new double[9];
+        valores[0] = CtrlPresentacionEstadistica.mitj_temps_GN();
+        valores[1] = CtrlPresentacionEstadistica.mitj_temps_Clicke();
+        valores[2] = CtrlPresentacionEstadistica.mitj_temps_Louvain();
+        valores[3] = CtrlPresentacionEstadistica.mitj_mida_GN();
+        valores[4] = CtrlPresentacionEstadistica.mitj_mida_Clicke();
+        valores[5] = CtrlPresentacionEstadistica.mitj_mida_Louvain();
+        valores[6] = valores[3] / valores[0];
+        valores[7] = valores[4] / valores[1];
+        valores[8] = valores[5] / valores[2];
+        int i = 0;
+        for (int j = 0; j < 3; j++){
+            for (int k = 1; k <4; k++){
+                jTable1.setValueAt(df.format(valores[i]), j, k);
+                ++i;
+            }
+        }
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("Tornar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Resetear Estadisticas");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout mesInfoLayout = new javax.swing.GroupLayout(mesInfo.getContentPane());
+        mesInfo.getContentPane().setLayout(mesInfoLayout);
+        mesInfoLayout.setHorizontalGroup(
+            mesInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(mesInfoLayout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(154, Short.MAX_VALUE))
+        );
+        mesInfoLayout.setVerticalGroup(
+            mesInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mesInfoLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        Actualitzar.setText("Actualitzar");
+        Actualitzar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ActualitzarActionPerformed(evt);
+            }
+        });
+
+        Reset.setText("Resetejar Estadístiques");
+        Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetActionPerformed(evt);
             }
         });
 
@@ -83,6 +216,20 @@ public class VistaEstadistica extends javax.swing.JFrame {
             .addGap(0, 440, Short.MAX_VALUE)
         );
 
+        mostrarMes.setText("Mes Informació");
+        mostrarMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarMesActionPerformed(evt);
+            }
+        });
+
+        Tornar.setText("Tornar Enrere");
+        Tornar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TornarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,46 +237,76 @@ public class VistaEstadistica extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Reset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Actualitzar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mostrarMes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Tornar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(Actualitzar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(mostrarMes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Reset, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Tornar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ActualitzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualitzarActionPerformed
         try {
             CtrlPresentacionEstadistica.crearGrafico(jPanel1);
         } catch (Exception ex) {
             Logger.getLogger(VistaEstadistica.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ActualitzarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetActionPerformed
+        confirmacioDialog.setVisible(true);
+        confirmacioDialog.pack();
+        RefineryUtilities.centerFrameOnScreen(confirmacioDialog);
+    }//GEN-LAST:event_ResetActionPerformed
+
+    private void mostrarMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarMesActionPerformed
+        mesInfo.setVisible(true);
+        mesInfo.pack();
+        RefineryUtilities.centerFrameOnScreen(mesInfo);
+    }//GEN-LAST:event_mostrarMesActionPerformed
+
+    private void TornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TornarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_TornarActionPerformed
+
+    private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
         CtrlPresentacionEstadistica.resetStatics();
         try {
             CtrlPresentacionEstadistica.crearGrafico(jPanel1);
         } catch (Exception ex) {
             Logger.getLogger(VistaEstadistica.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        confirmacioDialog.setVisible(false);
+    }//GEN-LAST:event_borrarActionPerformed
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        confirmacioDialog.setVisible(false);
+    }//GEN-LAST:event_cancelActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        mesInfo.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     /**
@@ -137,8 +314,18 @@ public class VistaEstadistica extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Actualitzar;
+    private javax.swing.JButton Reset;
+    private javax.swing.JButton Tornar;
+    private javax.swing.JButton borrar;
+    private javax.swing.JButton cancel;
+    private javax.swing.JDialog confirmacioDialog;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JDialog mesInfo;
+    private javax.swing.JButton mostrarMes;
     // End of variables declaration//GEN-END:variables
 }

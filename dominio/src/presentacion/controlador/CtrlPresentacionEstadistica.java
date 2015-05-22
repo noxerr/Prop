@@ -33,6 +33,43 @@ public class CtrlPresentacionEstadistica {
         CtrlEstadistica.resetearEstadisticas();
     }
     
+    public static void initEstadistica() throws IOException{
+        CtrlEstadistica.initEstadistica();
+    }
+     
+    
+    public static void guardarEstadistica() throws IOException{
+        CtrlEstadistica.guardarEstadistica();
+    }
+
+    public static void afegeix_mida_temps(int[] mida, int[] g){
+        CtrlEstadistica.afegeix_mida_temps(mida, g);
+    }
+    
+    public static double mitj_temps_GN(){
+        return CtrlEstadistica.mitj_temps_GN();
+    }
+    
+    public static double mitj_temps_Clicke(){
+        return CtrlEstadistica.mitj_temps_Clicke();
+    }
+    
+    public static double mitj_temps_Louvain(){
+        return CtrlEstadistica.mitj_temps_Louvain();
+    }
+    
+    public static double mitj_mida_GN(){
+        return CtrlEstadistica.mitj_mida_GN();
+    }
+    
+    public static double mitj_mida_Clicke(){
+        return CtrlEstadistica.mitj_mida_Clicke();
+    }
+    
+    public static double mitj_mida_Louvain(){
+        return CtrlEstadistica.mitj_mida_Louvain();
+    }
+    
     
     private static XYDataset createDataset() throws Exception {
         YIntervalSeries series1 = new YIntervalSeries("Newman");

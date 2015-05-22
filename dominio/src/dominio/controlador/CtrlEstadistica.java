@@ -40,15 +40,15 @@ public class CtrlEstadistica {
         estadistica.afegeix_mida_temps(mida, g);
     }
     
-    public static int mitj_temps_GN(){
+    public static double mitj_temps_GN(){
         return estadistica.mitj_temps_GN();
     }
     
-    public static int mitj_temps_Clicke(){
+    public static double mitj_temps_Clicke(){
         return estadistica.mitj_temps_Clicke();
     }
     
-    public static int mitj_temps_Louvain(){
+    public static double mitj_temps_Louvain(){
         return estadistica.mitj_temps_Louvain();
     }
     
@@ -62,14 +62,6 @@ public class CtrlEstadistica {
     
     public static double mitj_mida_Louvain(){
         return estadistica.mitj_mida_Louvain();
-    }
-    
-    public static String rapid(){
-        return estadistica.rapid();
-    }
-    
-    public static String petit(){
-        return estadistica.petit();
     }
     
     public static ArrayList<Double>[] getXYAlg(int alg) throws Exception{
