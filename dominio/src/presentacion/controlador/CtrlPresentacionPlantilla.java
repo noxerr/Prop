@@ -25,6 +25,10 @@ public class CtrlPresentacionPlantilla {
         CtrlPlantilla.crearPlantilla(nom);
     }
     
+    public static void crearPlantilla(String nom, int[] lPonds) throws Exception, IOException{
+        CtrlPlantilla.crearPlantilla(nom, lPonds);
+    }
+    
     public static void borrarPlantilla(String nom) throws FileNotFoundException, Exception{
         CtrlPlantilla.borrarPlantilla(nom);
     }

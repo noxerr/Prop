@@ -27,17 +27,30 @@ public class CtrlPlantilla {
     private static String oldName;
     
     public static void crearPlantilla(String nom) throws Exception, IOException{
-        if (nom.equalsIgnoreCase("default")) throw new Exception("No puedes crear otra plantilla default.");
-        else if (listaPlantillas.contains(nom)) throw new Exception("Ya existe la plantilla "+ nom + ".");
+        if (nom.equalsIgnoreCase("default")) throw new Exception("No pots crear un altre plantilla default.");
+        else if (nom.isEmpty()) throw new Exception("El nom no pot estar buit.");
+        else if (listaPlantillas.contains(nom)) throw new Exception("Ja existeix la plantilla "+ nom + ".");
         else {
             listaPlantillas.add(nom);
             mapPlantillas.put(nom, new Plantilla(nom));
         }
     }
     
+    
+    public static void crearPlantilla(String nom, int[] lPonds) throws Exception, IOException{
+        if (nom.equalsIgnoreCase("default")) throw new Exception("No pots crear un altre plantilla default.");
+        else if (nom.isEmpty()) throw new Exception("El nom no pot estar buit.");
+        else if (listaPlantillas.contains(nom)) throw new Exception("Ja existeix la plantilla "+ nom + ".");
+        else {
+            listaPlantillas.add(nom);
+            mapPlantillas.put(nom, new Plantilla(nom, lPonds));
+        }
+    }
+    
+    
     public static void borrarPlantilla(String nom) throws FileNotFoundException, Exception{
         if (!listaPlantillas.contains(nom)) throw new FileNotFoundException();
-        else if(nom.equalsIgnoreCase("default")) throw new Exception("La plantilla default no se puede borrar");
+        else if(nom.equalsIgnoreCase("default")) throw new Exception("La plantilla default no es pot esborrar");
         else {
             //CtrlPersistenciaPlantilla.borrarPlantilla(nom);
             listaPlantillas.remove(nom); 
