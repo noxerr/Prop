@@ -52,7 +52,6 @@ public class CtrlPlantilla {
         if (!listaPlantillas.contains(nom)) throw new FileNotFoundException();
         else if(nom.equalsIgnoreCase("default")) throw new Exception("La plantilla default no es pot esborrar");
         else {
-            //CtrlPersistenciaPlantilla.borrarPlantilla(nom);
             listaPlantillas.remove(nom); 
             mapPlantillas.remove(nom);
         }
@@ -76,8 +75,11 @@ public class CtrlPlantilla {
         CtrlPersistenciaPlantilla.guardarPlantillas(list);
     }
     
-    public static ArrayList<Integer> getListaPond(String nom){
-        return mapPlantillas.get(nom).getListaPond();
+    public static ArrayList<Integer> getListaPond(String nom) throws FileNotFoundException{
+        if (!listaPlantillas.contains(nom)) throw new FileNotFoundException();
+        else {
+            return mapPlantillas.get(nom).getListaPond();
+        }
     }
     
     public static HashMap<String, Plantilla> cargarPlantillas() {

@@ -41,7 +41,7 @@ public class CtrlPresentacionPlantilla {
         CtrlPlantilla.cargarPlantillas();
     }
     
-    public static ArrayList<Integer> getListaPond(String nom){
+    public static ArrayList<Integer> getListaPond(String nom) throws FileNotFoundException{
         return CtrlPlantilla.getListaPond(nom);
     }
     

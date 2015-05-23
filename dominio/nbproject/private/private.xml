@@ -4,9 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Dani/Desktop/PROYECTOS%20PERS/dominio/src/drivers/DriverEstadistica.java</file>
+            <file>file:/C:/Users/Dani/Desktop/PROYECTOS%20PERS/dominio/src/dominio/controlador/CtrlPlantilla.java</file>
             <file>file:/C:/Users/Dani/Desktop/PROYECTOS%20PERS/dominio/src/presentacion/controlador/CtrlPresentacionEstadistica.java</file>
             <file>file:/C:/Users/Dani/Desktop/PROYECTOS%20PERS/dominio/src/presentacion/VistaEstadistica.java</file>
             <file>file:/C:/Users/Dani/Desktop/PROYECTOS%20PERS/dominio/src/dominio/controlador/CtrlEstadistica.java</file>
+            <file>file:/C:/Users/Dani/Desktop/PROYECTOS%20PERS/dominio/src/dominio/Plantilla.java</file>
+            <file>file:/C:/Users/Dani/Desktop/PROYECTOS%20PERS/dominio/src/presentacion/controlador/CtrlPresentacionPlantilla.java</file>
         </group>
     </open-files>
 </project-private>
