@@ -33,16 +33,16 @@ public class CtrlPresentacionPlantilla {
         CtrlPlantilla.borrarPlantilla(nom);
     }
     
-    public static void ponder(int[] ponds){
-        CtrlPlantilla.ponder(ponds);
-    }
-    
     public static void guardarPlantillas() throws IOException{
         CtrlPlantilla.guardarPlantillas();
     }
     
     public static void cargarPlantillas() {
         CtrlPlantilla.cargarPlantillas();
+    }
+    
+    public static ArrayList<Integer> getListaPond(String nom){
+        return CtrlPlantilla.getListaPond(nom);
     }
     
     

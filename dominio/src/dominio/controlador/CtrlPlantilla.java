@@ -76,6 +76,10 @@ public class CtrlPlantilla {
         CtrlPersistenciaPlantilla.guardarPlantillas(list);
     }
     
+    public static ArrayList<Integer> getListaPond(String nom){
+        return mapPlantillas.get(nom).getListaPond();
+    }
+    
     public static HashMap<String, Plantilla> cargarPlantillas() {
         ArrayList<ArrayList<String>> list = CtrlPersistenciaPlantilla.cargarPlantillas();
         HashMap<String, Plantilla> map = new HashMap();
@@ -106,7 +110,7 @@ public class CtrlPlantilla {
     }
     
     
-    public static void ponder(int[] pond) {
+    private static void ponder(int[] pond) {
         int aux = pond[6];
         pond[6] = pond[1];
         pond[1] = pond[4];

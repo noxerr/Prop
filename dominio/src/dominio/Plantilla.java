@@ -2,6 +2,7 @@
 
 package dominio;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,16 @@ public class Plantilla {
         this.partit = listaPond[6];
         this.edat = listaPond[7];
         this.religio = listaPond[8];
+    }
+    
+    public ArrayList<Integer> getListaPond(){
+        ArrayList<Integer> ret = new ArrayList();
+        ret.add(votacioEq); ret.add(votacioDif);
+        ret.add(reunio); ret.add(conferencia);
+        ret.add(dinar); ret.add(lleure);
+        ret.add(partit); ret.add(edat);
+        ret.add(religio);
+        return ret;
     }
 
     // MODIFICADORA
