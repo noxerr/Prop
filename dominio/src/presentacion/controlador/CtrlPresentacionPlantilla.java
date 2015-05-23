@@ -33,6 +33,9 @@ public class CtrlPresentacionPlantilla {
         CtrlPlantilla.borrarPlantilla(nom);
     }
     
+    public static void ponder(int[] ponds){
+        CtrlPlantilla.ponder(ponds);
+    }
     
     public static void guardarPlantillas() throws IOException{
         CtrlPlantilla.guardarPlantillas();

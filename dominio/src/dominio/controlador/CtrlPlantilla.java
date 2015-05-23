@@ -106,7 +106,7 @@ public class CtrlPlantilla {
     }
     
     
-    private static void ponder(int[] pond) {
+    public static void ponder(int[] pond) {
         int aux = pond[6];
         pond[6] = pond[1];
         pond[1] = pond[4];
