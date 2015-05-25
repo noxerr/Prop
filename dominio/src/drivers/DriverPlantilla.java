@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import persistencia.Persistencia;
 import presentacion.NewJFrame;
 
 /**
@@ -174,8 +173,6 @@ public class DriverPlantilla {
         }*/
         
         ArrayList<String> ar = new ArrayList();
-        Persistencia.guardarDisco(ar, "hola2.txt", ret);
-        Persistencia.cargarDisco("hola2.txt", ret);
         CtrlEstadistica.initEstadistica();
         new NewJFrame().setVisible(true);
         

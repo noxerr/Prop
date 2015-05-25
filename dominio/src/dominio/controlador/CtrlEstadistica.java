@@ -9,6 +9,7 @@ package dominio.controlador;
 import dominio.Estadistica;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import persistencia.CtrlPersistenciaEstadistica;
 
 
@@ -20,7 +21,7 @@ public class CtrlEstadistica {
     private static Estadistica estadistica;
     
     public static void initEstadistica() throws IOException{
-        ArrayList<ArrayList<String>>[] all = CtrlPersistenciaEstadistica.cargarEstadistica();
+        List<List<String>>[] all = CtrlPersistenciaEstadistica.cargarEstadistica();
         estadistica = new Estadistica(all);
     }
     
@@ -32,7 +33,7 @@ public class CtrlEstadistica {
      
     
     public static void guardarEstadistica() throws IOException{
-        ArrayList<ArrayList<String>>[] ob = estadistica.getMaps();
+        List<List<String>>[] ob = estadistica.getMaps();
         CtrlPersistenciaEstadistica.guardarEstadistica(ob);
     }
 

@@ -8,7 +8,7 @@ package persistencia;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 
 /**
@@ -16,28 +16,22 @@ import java.util.Arrays;
  * @author dani__000
  */
 public class CtrlPersistenciaEstadistica {
-    public static ArrayList<ArrayList<String>>[] cargarEstadistica() throws IOException{
-        ArrayList<ArrayList<String>>[] ob = new ArrayList[3];
-        ArrayList<String>[] sizes = new ArrayList[3];
-        sizes[0] = new ArrayList<>(Arrays.asList("2", "2", "5"));
-        sizes[1] = new ArrayList<>(Arrays.asList("4", "1", "3"));
-        sizes[2] = new ArrayList<>(Arrays.asList("1", "52", "83"));
-        
-        ArrayList<String>[] times = new ArrayList[3];
-        times[0] = new ArrayList<>(Arrays.asList("10", "20", "30"));
-        times[1] = new ArrayList<>(Arrays.asList("10", "20", "30"));
-        times[2] = new ArrayList<>(Arrays.asList("10", "20", "30"));
-        
-        return ob;
-        //llamarFuncionCargarCosasDeDisco
+    public static List<List<String>>[] cargarEstadistica() throws IOException{  
+        List<List<String>>[] ret = new ArrayList[3];
+        ret[0] = FileManager.read("EstadisticasN", "estadistica");
+        ret[1] = FileManager.read("EstadisticasC", "estadistica");
+        ret[2] = FileManager.read("EstadisticasL", "estadistica");
+        return ret;
     }
     
     public static void resetearEstadistica(){
         //llamarFuncionBorrarCosasDeDisco
     }
     
-    public static void guardarEstadistica(ArrayList<ArrayList<String>>[] ob) throws IOException{
-        //llamarFuncionModificarCosasDeDisco
+    public static void guardarEstadistica(List<List<String>>[] ob) throws IOException{
+        FileManager.WriteFile(ob[0], "EstadisticasN", "estadistica");
+        FileManager.WriteFile(ob[1], "EstadisticasC", "estadistica");
+        FileManager.WriteFile(ob[2], "EstadisticasL", "estadistica");
     }
     
 }

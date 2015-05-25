@@ -7,9 +7,9 @@
 package dominio;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ListIterator;
 
 /**
@@ -28,7 +28,7 @@ public class Estadistica {
         mapaLouvain = new HashMap();
     }
     
-    public Estadistica(ArrayList<ArrayList<String>>[] all) throws IOException{
+    public Estadistica(List<List<String>>[] all) throws IOException{
         HashMap<Integer, int[]>[] maps = convertFromString(all);
         mapaNewman = maps[0];
         mapaClicke = maps[1];
@@ -94,7 +94,6 @@ public class Estadistica {
             n += vec[1];
             TTotal += vec[0];
         }
-        System.out.println("entra aki con n: " + n);
         if (n == 0) n = 1;
         return (TTotal/n);
     }
@@ -180,18 +179,18 @@ public class Estadistica {
         return (TamanyTotal/n2);
     }
 
-    public ArrayList<ArrayList<String>>[] getMaps() throws IOException{
-        ArrayList<ArrayList<String>>[] a0 = new ArrayList[3];
+    public List<List<String>>[] getMaps() throws IOException{
+        List<List<String>>[] a0 = new ArrayList[3];
         a0[0] = convertToString(mapaNewman);
         a0[1] = convertToString(mapaClicke);
         a0[2] = convertToString(mapaLouvain);     
         return a0;
     }
     
-    private ArrayList<ArrayList<String>> convertToString(HashMap<Integer, int[]> object) throws IOException {
-        ArrayList<ArrayList<String>> ret = new ArrayList();
+    private List<List<String>> convertToString(HashMap<Integer, int[]> object) throws IOException {
+        List<List<String>> ret = new ArrayList();
         ArrayList<String> fila;
-        System.out.println("filas: ");
+        //System.out.println("filas: ");
         for (int i : object.keySet()){
             fila = new ArrayList();
             fila.add(String.valueOf(i));
@@ -199,19 +198,19 @@ public class Estadistica {
                 fila.add(String.valueOf(j));
             }
             ret.add(fila);
-            System.out.println(fila);
+            //System.out.println(fila);
         }
         return ret;
     }
     
-    private HashMap<Integer, int[]>[] convertFromString(ArrayList<ArrayList<String>>[] value) throws IOException {
+    private HashMap<Integer, int[]>[] convertFromString(List<List<String>>[] value) throws IOException {
         HashMap<Integer, int[]>[] ret = new HashMap[3];
         ret[0] = new HashMap();
         ret[1] = new HashMap();
         ret[2] = new HashMap();
-        ArrayList<ArrayList<String>> map0 = value[0];
-        ArrayList<ArrayList<String>> map1 = value[1];
-        ArrayList<ArrayList<String>> map2 = value[2];
+        List<List<String>> map0 = value[0];
+        List<List<String>> map1 = value[1];
+        List<List<String>> map2 = value[2];
         if ((map0 != null) && (!map0.isEmpty())){
             ListIterator l0 = map0.listIterator();
             ListIterator l1 = map1.listIterator();
@@ -256,7 +255,7 @@ public class Estadistica {
         return ret;
     }
     
-    public void setSizesTimes(ArrayList<ArrayList<String>>[] a) throws IOException{
+    public void setSizesTimes(List<List<String>>[] a) throws IOException{
         HashMap<Integer, int[]>[] maps = convertFromString(a);
         mapaNewman = maps[0];
         mapaClicke = maps[1];
