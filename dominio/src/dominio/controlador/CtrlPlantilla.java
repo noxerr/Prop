@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import persistencia.CtrlPersistenciaPlantilla;
@@ -59,8 +60,8 @@ public class CtrlPlantilla {
     
     
     public static void guardarPlantillas() throws IOException{
-        ArrayList<ArrayList<String>> list = new ArrayList();
-        ArrayList<String> plantilla;
+        List<List<String>> list = new ArrayList();
+        List<String> plantilla;
         for (String clave : mapPlantillas.keySet()) { 
             plantilla = new ArrayList();
             Plantilla valor = mapPlantillas.get(clave);
@@ -83,7 +84,7 @@ public class CtrlPlantilla {
     }
     
     public static HashMap<String, Plantilla> cargarPlantillas() {
-        ArrayList<ArrayList<String>> list = CtrlPersistenciaPlantilla.cargarPlantillas();
+        List<List<String>> list = CtrlPersistenciaPlantilla.cargarPlantillas();
         HashMap<String, Plantilla> map = new HashMap();
         ListIterator l1 = list.listIterator();
         ListIterator l2;

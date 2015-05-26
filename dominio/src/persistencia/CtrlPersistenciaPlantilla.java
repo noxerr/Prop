@@ -7,8 +7,7 @@
 package persistencia;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -17,17 +16,16 @@ import java.util.Arrays;
  */
 public class CtrlPersistenciaPlantilla {
 
-    public static void guardarPlantillas(ArrayList<ArrayList<String>> list) throws IOException{
-        //llamarFuncionAñadirCosasADisco
+    public static void guardarPlantillas(List<List<String>> list) throws IOException{
+        FileManager.WriteFile(list, "plantillas", "plantilla");
     }
     
     
-    public static ArrayList<ArrayList<String>> cargarPlantillas(){
-        ArrayList<ArrayList<String>> list = new ArrayList();
+    public static List<List<String>> cargarPlantillas(){
+        /*ArrayList<ArrayList<String>> list = new ArrayList();
         ArrayList<String> ret = new ArrayList<>(
             Arrays.asList("una", "0", "2", "3", "4", "5", "6", "7", "8", "9"));
-        list.add(ret);
-        //ret = llamarFuncionCargarCosasDeDisco
-        return list;
+        list.add(ret);*/
+        return FileManager.read("plantillas", "plantilla");
     }
 }

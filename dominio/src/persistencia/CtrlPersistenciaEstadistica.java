@@ -25,7 +25,9 @@ public class CtrlPersistenciaEstadistica {
     }
     
     public static void resetearEstadistica(){
-        //llamarFuncionBorrarCosasDeDisco
+        FileManager.buidaficher("EstadisticasN");
+        FileManager.buidaficher("EstadisticasC");
+        FileManager.buidaficher("EstadisticasL");
     }
     
     public static void guardarEstadistica(List<List<String>>[] ob) throws IOException{
