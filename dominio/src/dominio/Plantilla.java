@@ -35,15 +35,6 @@ public class Plantilla {
         this.religio = listaPond[8];
     }
     
-    public ArrayList<Integer> getListaPond(){
-        ArrayList<Integer> ret = new ArrayList();
-        ret.add(votacioEq); ret.add(votacioDif);
-        ret.add(reunio); ret.add(conferencia);
-        ret.add(dinar); ret.add(lleure);
-        ret.add(partit); ret.add(edat);
-        ret.add(religio);
-        return ret;
-    }
 
     // MODIFICADORA
     // Pre: plantilla amb nom diferent de “default”
@@ -132,6 +123,16 @@ public class Plantilla {
         
         return total;
     }
+    
+    public ArrayList<Integer> getListaPond(){
+        ArrayList<Integer> ret = new ArrayList();
+        ret.add(votacioEq); ret.add(votacioDif);
+        ret.add(reunio); ret.add(conferencia);
+        ret.add(dinar); ret.add(lleure);
+        ret.add(partit); ret.add(edat);
+        ret.add(religio);
+        return ret;
+    }
 
     // Pre: existeix la plantilla
     // Post: retorna dos object, el [0] es el string del nom y el [1] un hashmap
@@ -139,7 +140,7 @@ public class Plantilla {
     public Object[] getPond(){
         Object[] retorno = new Object[2];
         retorno[0] = this.nom;
-        Map<String, Integer> Pair = new HashMap<String, Integer>();
+        Map<String, Integer> Pair = new HashMap();
         Pair.put("votacioEq", this.votacioEq);
         Pair.put("votacioDif", this.votacioDif);
         Pair.put("reunio", this.reunio);

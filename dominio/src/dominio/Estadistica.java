@@ -132,16 +132,17 @@ public class Estadistica {
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de girvan Newman guardats
     public double mitj_mida_GN(){
-        int n = 0;
-        double n2 = 0, TamanyTotal = 0;
+        int n = 0, aux;
+        double n2, TamanyTotal = 0;
         int[] vec;
         for (int v : mapaLouvain.keySet()){
             vec = mapaLouvain.get(v);
-            n += vec[1];
-            TamanyTotal += v;
+            aux = vec[1];
+            n += aux;
+            TamanyTotal += (v*aux);
         }
         if (n == 0) n = 1;
-        n2 = n;
+        n2 = n; //convertimos a double
         return (TamanyTotal/n2);
     }
 
@@ -149,16 +150,17 @@ public class Estadistica {
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de clicke guardats
     public double mitj_mida_Clicke(){
-        int n = 0;
-        double n2 = 0, TamanyTotal = 0;
+        int n = 0, aux;
+        double n2, TamanyTotal = 0;
         int[] vec;
         for (int v : mapaClicke.keySet()){
             vec = mapaClicke.get(v);
-            n += vec[1];
-            TamanyTotal += v;
+            aux = vec[1];
+            n += aux;
+            TamanyTotal += (v*aux);
         }
         if (n == 0) n = 1;
-        n2 = n;
+        n2 = n; //convertimos a double
         return (TamanyTotal/n2);
     }    
     
@@ -166,16 +168,17 @@ public class Estadistica {
     //Pre: cert
     //Post: retorna la mitjana dels tamanys de louvain guardats
     public double mitj_mida_Louvain(){
-        int n = 0;
-        double n2 = 0, TamanyTotal = 0;
+        int n = 0, aux;
+        double n2, TamanyTotal = 0;
         int[] vec;
         for (int v : mapaLouvain.keySet()){
             vec = mapaLouvain.get(v);
-            n += vec[1];
-            TamanyTotal += v;
+            aux = vec[1];
+            n += aux;
+            TamanyTotal += (v*aux);
         }
         if (n == 0) n = 1;
-        n2 = n;
+        n2 = n; //convertimos a double
         return (TamanyTotal/n2);
     }
 
