@@ -6,15 +6,11 @@
 package presentacion.controlador;
 
 import dominio.Plantilla;
-import dominio.controlador.CtrlEstadistica;
 import dominio.controlador.CtrlPlantilla;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ListIterator;
 import java.util.Map;
-import persistencia.CtrlPersistenciaPlantilla;
 
 /**
  *
