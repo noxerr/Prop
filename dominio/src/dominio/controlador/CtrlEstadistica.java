@@ -41,6 +41,10 @@ public class CtrlEstadistica {
         estadistica.afegeix_mida_temps(mida, g);
     }
     
+    public static void afegeix_mida_temps(int mida, int g, int alg){
+        estadistica.afegeix_mida_temps(mida, g, alg);
+    }
+    
     public static double mitj_temps_GN(){
         return estadistica.mitj_temps_GN();
     }

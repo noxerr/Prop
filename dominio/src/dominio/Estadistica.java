@@ -83,6 +83,56 @@ public class Estadistica {
             mapaLouvain.put(mida[2], sd);
         }
     }
+    
+    
+    public void afegeix_mida_temps(int mida, int temps, int alg){
+        
+        int[] sd = new int[3];
+        switch(alg){
+            case 0: //newman
+                if (mapaNewman.containsKey(mida)) {
+                    sd = mapaNewman.get(mida);
+                    sd[0] += temps;
+                    sd[1]++;
+                    sd[2] += (temps*temps);
+                }
+                else{
+                    sd[0] = temps;
+                    sd[1] = 1;
+                    sd[2] = (temps*temps);
+                    mapaNewman.put(mida, sd);
+                }
+                break;
+            case 1: //Clicke
+                if (mapaClicke.containsKey(mida)) {
+                    sd = mapaClicke.get(mida);
+                    sd[0] += temps;
+                    sd[1]++;
+                    sd[2] += (temps*temps);
+                }
+                else{
+                    sd[0] = temps;
+                    sd[1] = 1;
+                    sd[2] = (temps*temps);
+                    mapaClicke.put(mida, sd);
+                }
+                break;
+            case 2: //Louvain
+                if (mapaLouvain.containsKey(mida)) {
+                    sd = mapaLouvain.get(mida);
+                    sd[0] += temps;
+                    sd[1]++;
+                    sd[2] += (temps*temps);
+                }
+                else{
+                    sd[0] = temps;
+                    sd[1] = 1;
+                    sd[2] = (temps*temps);
+                    mapaLouvain.put(mida, sd);
+                }
+                break;
+        }
+    }
 
     //Pre: cert
     //Post: retorna la mitjana dels temps de girvan Newman guardats
