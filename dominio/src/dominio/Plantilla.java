@@ -104,23 +104,17 @@ public class Plantilla {
     public int calculAfinitat(int[] lista){
         int total = 0;
         Object[] a = getPond();
-        Map<String,Integer> mapa = (Map) a[1];
-        int i = 0;
+        ArrayList<Integer> listaPonds = (ArrayList<Integer>) a[1];
         /*for (String clave : mapa.keySet()) {   
             int valor = mapa.get(clave);
             total += (valor*lista[i]);
             if (i<9)i++; //para evitar errores
         }*/
-        total += (lista[0] * mapa.get("votacioEq"));
-        total += (lista[1] * mapa.get("votacioDif"));
-        total += (lista[2] * mapa.get("reunio"));
-        total += (lista[3] * mapa.get("conferencia"));
-        total += (lista[4] * mapa.get("dinar"));
-        total += (lista[5] * mapa.get("lleure"));
-        total += (lista[6] * mapa.get("partit"));
-        total += (lista[7] * mapa.get("edat"));
-        total += (lista[8] * mapa.get("religio"));
-        
+        int j = 0;
+        for(int i : listaPonds){
+            total += i * lista[j];
+            j++;
+        }        
         return total;
     }
     
@@ -135,26 +129,23 @@ public class Plantilla {
     }
 
     // Pre: existeix la plantilla
-    // Post: retorna dos object, el [0] es el string del nom y el [1] un hashmap
+    // Post: retorna dos object, el [0] es el string del nom y el [1] un arraylist
     // amb la llista de atributs - ponderacio
     public Object[] getPond(){
         Object[] retorno = new Object[2];
         retorno[0] = this.nom;
-        Map<String, Integer> Pair = new HashMap();
-        Pair.put("votacioEq", this.votacioEq);
-        Pair.put("votacioDif", this.votacioDif);
-        Pair.put("reunio", this.reunio);
-        Pair.put("conferencia", this.conferencia);
-        Pair.put("dinar", this.dinar);
-        Pair.put("lleure", this.lleure);
-        Pair.put("partit", this.partit);
-        Pair.put("edat", this.edat);
-        Pair.put("religio", this.religio);
-        retorno[1] = Pair;
+        ArrayList<Integer> lista = new ArrayList();
+        lista.add(votacioEq);
+        lista.add(votacioDif);
+        lista.add(reunio);
+        lista.add(conferencia);
+        lista.add(dinar);
+        lista.add(lleure);
+        lista.add(partit);
+        lista.add(edat);
+        lista.add(religio);
+        retorno[1] = lista;
         return retorno;        
-        //PARA OBTENER EL RESULTADO, CREAIS OTRO OBJECT COMO LA 1A LINEA DE LA FUNCION
-        //LO IGUALAIS A GETPOND Y LUEGO HACEIS STRING NOMBRE = (STRING) OBJECTO[0] Y
-        //MAP ... TAL = NEW HASHMAP TAL.. ; TAL = (MAP<TAL,TAL>) OBJETO[1].
     }
     
     // Pre: existeix la plantilla

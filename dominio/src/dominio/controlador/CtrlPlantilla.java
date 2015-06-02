@@ -66,15 +66,16 @@ public class CtrlPlantilla {
             plantilla = new ArrayList();
             Plantilla valor = mapPlantillas.get(clave);
             Object[] ob = valor.getPond();
-            Map<String, Integer> mp = (Map<String, Integer>) ob[1];
+            List<Integer> aux = (List<Integer>) ob[1];
             plantilla.add((String) ob[0]);
-            for (int i : mp.values()){
+            for (int i : aux){
                 plantilla.add(String.valueOf(i));
             }
             list.add(plantilla);
         }
         CtrlPersistenciaPlantilla.guardarPlantillas(list);
     }
+    
     
     public static ArrayList<Integer> getListaPond(String nom) throws FileNotFoundException{
         if (!listaPlantillas.contains(nom)) throw new FileNotFoundException();
@@ -112,18 +113,6 @@ public class CtrlPlantilla {
         return map;
     }
     
-    
-    private static void ponder(int[] pond) {
-        int aux = pond[0];
-        pond[0] = pond[8];
-        pond[8] = pond[3];
-        pond[3] = pond[1];
-        pond[1] = pond[0];
-        pond[0] = pond[8];
-        pond[5] = pond[8];
-        pond[8] = pond[7];
-        pond[7] = aux;
-    }
     
     public static Map<String,Plantilla> mostarMapaPlantillas(){
         return mapPlantillas;
