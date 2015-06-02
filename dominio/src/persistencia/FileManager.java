@@ -64,7 +64,7 @@ public class FileManager {
 	      File archivo = null;
 	      FileReader fr = null;
 	      BufferedReader br = null;
-	      List<List<String>> L = new ArrayList();
+	      List<List<String>> L = new ArrayList<List<String>>();
 	 
 	      try {
 	         // Apertura del fichero y creacion de BufferedReader para poder
@@ -75,10 +75,10 @@ public class FileManager {
 	 
 	         // Lectura del fichero
 	         String linea;
-	         List<String> l1 = new ArrayList();
+	         List<String> l1 = new ArrayList<String>();
 	         while((linea=br.readLine())!=null){
 	            if(linea.equals(objecte)){
-	            	l1 = new ArrayList();
+	            	l1 = new ArrayList<>();
 	            	L.add(l1);
 	            }
 	            else{

@@ -99,7 +99,7 @@ public class CtrlPlantilla {
                 pond[n] = Integer.valueOf((String) l2.next());
                 n++;
             }
-            ponder(pond);
+            //ponder(pond);
             map.put(nom, new Plantilla(nom,pond));
         }
         for (String v : map.keySet()){
@@ -114,12 +114,12 @@ public class CtrlPlantilla {
     
     
     private static void ponder(int[] pond) {
-        int aux = pond[6];
-        pond[6] = pond[1];
-        pond[1] = pond[4];
-        pond[4] = pond[3];
-        pond[3] = pond[2];
-        pond[2] = pond[5];
+        int aux = pond[0];
+        pond[0] = pond[8];
+        pond[8] = pond[3];
+        pond[3] = pond[1];
+        pond[1] = pond[0];
+        pond[0] = pond[8];
         pond[5] = pond[8];
         pond[8] = pond[7];
         pond[7] = aux;

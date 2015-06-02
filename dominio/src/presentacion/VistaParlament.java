@@ -4,19 +4,47 @@
  */
 package presentacion;
 
-/**
- *
- * @author daniel.roca.lopez
- */
-public class VistaParlament extends javax.swing.JFrame {
+import dominio.controlador.Ctrl_diputat;
+import java.util.Random;
+import javax.swing.table.DefaultTableModel;
+import java.util.*;
+import javax.swing.text.html.parser.DTDConstants;
+import presentacion.controlador.Ctrl_VistaEvent;
+import presentacion.controlador.Ctrl_VistaParlament;
 
+  
+public class VistaParlament extends javax.swing.JFrame {
+    private Set<Integer> diputatsActuals;
+    // es la info del diputado que se va a modificar
+    private Missatge_basic msg;
+    private int num_row;
+    private Ctrl_VistaParlament cVP = new Ctrl_VistaParlament(this);
+    private Ctrl_VistaEvent cVE;
+    private int num_dip_act = 0;
+    private int next_id;
+    
     /**
      * Creates new form NewJPanel
      */
     public VistaParlament() {
         initComponents();
+       diputatsActuals = new HashSet<Integer>();
+       
     }
-
+    
+    // ALERTA   
+    public Ctrl_diputat getCtrl_dip() {
+        return cVP.getCtrl_diputat();
+    }
+    
+    public Ctrl_VistaParlament getCtrl_VParl() {
+        return cVP;
+    }
+            
+    
+    public void AssociarCtrl_VistaEvent(Ctrl_VistaEvent c) {
+        cVE = c;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,60 +54,976 @@ public class VistaParlament extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        AfegirDip = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        campEdat = new javax.swing.JTextField();
+        campSexe = new javax.swing.JTextField();
+        campPartit = new javax.swing.JTextField();
+        campReligio = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        campNom = new javax.swing.JTextField();
+        campId = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        AvisError = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Errors = new javax.swing.JTextArea();
+        jLabel7 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        InfoSuccess = new javax.swing.JDialog();
+        jLabel8 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        ModificaDip = new javax.swing.JDialog();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        Modifica = new javax.swing.JButton();
+        campEdat1 = new javax.swing.JTextField();
+        campSexe1 = new javax.swing.JTextField();
+        campPartit1 = new javax.swing.JTextField();
+        campReligio1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        campNom1 = new javax.swing.JTextField();
+        campId1 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
+        RelacioDiputats = new javax.swing.JDialog();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jButton11 = new javax.swing.JButton();
+        AfegeixNou = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        Modifica_sel = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("NOTA:\nEDAT -> HA DE SER UN ENTER >= 18 i <= 120\nL'IDENTIFICADOR ÉS ÚNIC PER A CADA DIPUTAT.\nCAL OMPLENAR TOTS ELS CAMPS");
+        jTextArea1.setFocusable(false);
+        jScrollPane1.setViewportView(jTextArea1);
 
-        jLabel1.setText("frameeeeeee");
+        jButton1.setText("AFEGIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
+        jLabel1.setText("IDENTIFICADOR");
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jLabel2.setText("NOM");
+
+        jLabel3.setText("EDAT");
+
+        jLabel4.setText("SEXE");
+
+        campId.setEditable(false);
+
+        jLabel5.setText("PARTIT");
+
+        jLabel6.setText("RELIGIO");
+
+        jButton2.setText("TANCA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AfegirDipLayout = new javax.swing.GroupLayout(AfegirDip.getContentPane());
+        AfegirDip.getContentPane().setLayout(AfegirDipLayout);
+        AfegirDipLayout.setHorizontalGroup(
+            AfegirDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AfegirDipLayout.createSequentialGroup()
+                .addGroup(AfegirDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AfegirDipLayout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(AfegirDipLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(AfegirDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AfegirDipLayout.createSequentialGroup()
+                                .addComponent(campId, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campNom, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campEdat, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campSexe, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(campPartit, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AfegirDipLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(46, 46, 46)
+                                .addComponent(jLabel2)
+                                .addGap(67, 67, 67)
+                                .addComponent(jLabel3)
+                                .addGap(63, 63, 63)
+                                .addComponent(jLabel4)
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel5))
+                            .addGroup(AfegirDipLayout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)))
+                        .addGroup(AfegirDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AfegirDipLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(campReligio, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(AfegirDipLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel6)))))
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+        AfegirDipLayout.setVerticalGroup(
+            AfegirDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AfegirDipLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(AfegirDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(9, 9, 9)
+                .addGroup(AfegirDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campEdat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campSexe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campPartit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campReligio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(AfegirDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(36, 36, 36))
+        );
+
+        Errors.setColumns(20);
+        Errors.setRows(5);
+        jScrollPane3.setViewportView(Errors);
+
+        jLabel7.setText("Error a l'introduir les dades");
+
+        jButton5.setText("OK");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AvisErrorLayout = new javax.swing.GroupLayout(AvisError.getContentPane());
+        AvisError.getContentPane().setLayout(AvisErrorLayout);
+        AvisErrorLayout.setHorizontalGroup(
+            AvisErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AvisErrorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AvisErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AvisErrorLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addContainerGap())
+                    .addGroup(AvisErrorLayout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                        .addGap(50, 50, 50))))
+            .addGroup(AvisErrorLayout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        AvisErrorLayout.setVerticalGroup(
+            AvisErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AvisErrorLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        jLabel8.setText("DIPUTAT AFEGIT CORRECTAMENT");
+
+        jButton4.setText("ENTESOS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout InfoSuccessLayout = new javax.swing.GroupLayout(InfoSuccess.getContentPane());
+        InfoSuccess.getContentPane().setLayout(InfoSuccessLayout);
+        InfoSuccessLayout.setHorizontalGroup(
+            InfoSuccessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InfoSuccessLayout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
+            .addGroup(InfoSuccessLayout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        InfoSuccessLayout.setVerticalGroup(
+            InfoSuccessLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InfoSuccessLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(jButton4)
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("NOTA:\nEDAT -> HA DE SER UN NOMBRE ENTER > 18 I < 120.\nCAL OMPLENAR TOTS ELS CAMPS");
+        jTextArea2.setFocusable(false);
+        jScrollPane4.setViewportView(jTextArea2);
+
+        Modifica.setText("MODIFICA");
+        Modifica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificaActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("IDENTIFICADOR");
+
+        jLabel10.setText("NOM");
+
+        jLabel11.setText("EDAT");
+
+        jLabel12.setText("SEXE");
+
+        campId1.setEditable(false);
+
+        jLabel13.setText("PARTIT");
+
+        jLabel14.setText("RELIGIO");
+
+        jButton7.setText("TANCA");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ModificaDipLayout = new javax.swing.GroupLayout(ModificaDip.getContentPane());
+        ModificaDip.getContentPane().setLayout(ModificaDipLayout);
+        ModificaDipLayout.setHorizontalGroup(
+            ModificaDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ModificaDipLayout.createSequentialGroup()
+                .addGroup(ModificaDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ModificaDipLayout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(ModificaDipLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(ModificaDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ModificaDipLayout.createSequentialGroup()
+                                .addComponent(campId1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campNom1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campEdat1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campSexe1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(campPartit1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ModificaDipLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(46, 46, 46)
+                                .addComponent(jLabel10)
+                                .addGap(67, 67, 67)
+                                .addComponent(jLabel11)
+                                .addGap(63, 63, 63)
+                                .addComponent(jLabel12)
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel13))
+                            .addGroup(ModificaDipLayout.createSequentialGroup()
+                                .addComponent(Modifica)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton7)))
+                        .addGroup(ModificaDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ModificaDipLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(campReligio1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(ModificaDipLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel14)))))
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+        ModificaDipLayout.setVerticalGroup(
+            ModificaDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ModificaDipLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(ModificaDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
+                .addGap(9, 9, 9)
+                .addGroup(ModificaDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campNom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campEdat1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campSexe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campPartit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campReligio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(ModificaDipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Modifica)
+                    .addComponent(jButton7))
+                .addGap(36, 36, 36))
+        );
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "identificador", "nom", "edat", "sexe", "partit", "religio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable2.getTableHeader().setReorderingAllowed(false);
+        jTable2.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTable2InputMethodTextChanged(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jTable2);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Reunio", "Esport", "Votacions =", "Dinar", "Conferencia", "Votacions !="
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable3.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(jTable3);
+
+        jButton11.setText("TANCA");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout RelacioDiputatsLayout = new javax.swing.GroupLayout(RelacioDiputats.getContentPane());
+        RelacioDiputats.getContentPane().setLayout(RelacioDiputatsLayout);
+        RelacioDiputatsLayout.setHorizontalGroup(
+            RelacioDiputatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RelacioDiputatsLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane5)
+                .addGap(21, 21, 21))
+            .addGroup(RelacioDiputatsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6)
+                .addContainerGap())
+            .addGroup(RelacioDiputatsLayout.createSequentialGroup()
+                .addGap(407, 407, 407)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
+        );
+        RelacioDiputatsLayout.setVerticalGroup(
+            RelacioDiputatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RelacioDiputatsLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(jButton11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
+        );
+
+        AfegeixNou.setText("AFEGIR NOU");
+        AfegeixNou.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AfegeixNouActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "identificador", "nom", "edat", "sexe", "partit", "religio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTable1InputMethodTextChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jButton3.setText("ELIMINA SELECCIONATS");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        Modifica_sel.setText("MODIFICAR SELECCIONAT");
+        Modifica_sel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Modifica_selActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("GUARDAR");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("CARREGAR");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("VEURE RELACIO EVENTS");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(0, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jButton1)))
+                        .addComponent(AfegeixNou, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton3)
+                        .addGap(49, 49, 49)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 110, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Modifica_sel, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jButton1)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AfegeixNou, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Modifica_sel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton8)
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
+    private void AfegeixNouActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AfegeixNouActionPerformed
+        
+        next_id = diputatsActuals.size() + 1;
+        AfegirDip.setVisible(true);
+        AfegirDip.pack();
+        campId.setText(String.valueOf(next_id));
+        
+        
+    }//GEN-LAST:event_AfegeixNouActionPerformed
+    private void afegir_dades_taula(List<String> info) {
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable1.getModel();
+        Vector <String> aux = new Vector<>();
+        for (String s:info) {
+            aux.add(s);
+        }
+        model.addRow(aux);
+       
+    }
     
+    private void sobre_fila(List<String> info) {
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable1.getModel();
+        System.out.println(num_row);
+        System.out.println(info);
+        model.removeRow(num_row);
+        model.insertRow(num_row, (Vector)info);
+    }
+    private void jTable1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable1InputMethodTextChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTable1InputMethodTextChanged
+    
+    public void carrega_dades(List< List<String> > info) {
+        diputatsActuals = new HashSet<Integer>();
+        for (List<String> aux: info) {
+            Integer d = Integer.parseInt(aux.get(0));
+            diputatsActuals.add(d);
+            afegir_dades_taula(aux);
+           
+        }
+    }
+    
+    public ArrayList <ArrayList <String> > obte_info_diputats () {
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable1.getModel();
+        ArrayList <ArrayList <String> > ret = new ArrayList<>();
+        for (int i = 0; i < model.getRowCount(); ++i) {
+                ArrayList<String> aux = new ArrayList<>();
+            for (int j = 0; j < model.getColumnCount(); ++j) {
+                aux.add((String) model.getValueAt(i, j));
+            }
+            ret.add(aux);
+        }
+        
+        return ret;
+    }
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable1.getModel();
+        int[] selectedRows = jTable1.getSelectedRows();
+        if (selectedRows.length > 0) {
+            for (int i = selectedRows.length - 1; i >= 0; i--) {
+                int id = Integer.parseInt((String) model.getValueAt(selectedRows[i], 0));
+                model.removeRow(selectedRows[i]);
+                diputatsActuals.remove(id);
+                cVP.eliminaDiputat(id);
+                // eliminar del set i del controlador
+                // llamar a la funcion esborra_diputat(id)
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+    private int test_String(String camp) {
+        int ret = -1;
+        try {
+            ret = Integer.valueOf(camp);
+            //System.out.println(ret);
+        }
+        catch (NumberFormatException e) {
+            ret = -1;
+        }
+        return ret;
+        
+    
+    }   
+    
+     private boolean existeixDiputat(Integer i) {
+        return diputatsActuals.contains(i);
+    }
+     
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        boolean afegir = true;
+        int dip = -1; int edat = -1;
+        Errors.setText("");
+        
+        if (campEdat.getText().isEmpty() || campId.getText().isEmpty() ||
+            campNom.getText().isEmpty() || campPartit.getText().isEmpty()
+            || campReligio.getText().isEmpty() || campSexe.getText().isEmpty()) {
+            //Errores.setText("Algun camp esta buit");
+            afegir &= false;
+            Errors.append("Algun camp esta buit");
+
+        }
+        if (! campId.getText().isEmpty() ) {
+            dip = test_String(campId.getText());
+            if (dip < 0) {
+                afegir &= false;
+                Errors.append("\n Diputat ha de ser un enter positiu");
+            }
+            else if (existeixDiputat(dip)) {
+                afegir &= false;
+                Errors.append("\n Diputat ja existeix");
+            }
+            else afegir &= true;
+        }
+        if (! campEdat.getText().isEmpty()) {
+            edat = test_String(campEdat.getText());
+            if (edat < 18 || edat > 120) {
+                afegir &= false;
+                Errors.append("\n Edat ha de ser un enter positiu major de 18 i menor de 120");
+            }
+            else {
+                afegir &= true;
+            }
+        }
+        
+        if (! afegir) { // mostrar missatge error, no s'ha afegit
+            AvisError.setVisible(true);
+            AvisError.pack();
+        }
+        else { // cal afegirlo i mostrar missatge OK
+
+            // afegir diputat al controlador
+            Vector<String> info = new Vector<String>(6);
+            info.add(campId.getText());
+            info.add(campNom.getText());
+            info.add(campEdat.getText());
+            info.add(campSexe.getText());
+            info.add(campPartit.getText());
+            info.add(campReligio.getText());
+            afegir_dades_taula(info);
+            diputatsActuals.add(dip);
+            cVP.afegir_diputat(info);
+            InfoSuccess.setVisible(true);
+            InfoSuccess.pack();
+            next_id += 1;
+            campId.setText(String.valueOf(next_id));
+
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        InfoSuccess.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        AfegirDip.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        AvisError.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+    private void omple_caselles_modifica (ArrayList<String> info_diputat) {
+        campId1.setText(info_diputat.get(0));
+        campNom1.setText(info_diputat.get(1));
+        campEdat1.setText(info_diputat.get(2));
+        campSexe1.setText(info_diputat.get(3));
+        campPartit1.setText(info_diputat.get(4));
+        campReligio1.setText(info_diputat.get(5));
+    
+        
+    
+}
+    private void Modifica_selActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modifica_selActionPerformed
+        // TODO add your handling code here:
+        ArrayList<String> info_diputat;
+        info_diputat = new ArrayList<String>(6);
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable1.getModel();
+        int[] selectedRows = jTable1.getSelectedRows();
+        if (selectedRows.length == 1) {
+            num_row = jTable1.getSelectedRow();
+            int column = jTable1.getColumnCount();
+            for(int i = 0; i < column; i++) {
+                info_diputat.add((String) jTable1.getValueAt(num_row, i));
+            }
+            omple_caselles_modifica(info_diputat);
+            ModificaDip.setVisible(true);
+            ModificaDip.pack();
+            
+            
+        }
+        else {
+            msg = new Missatge_basic(this, true);
+            msg.setMsg("Selecciona una fila");
+            msg.setVisible(true);
+        }
+        // id, nom, edad, sexe, partit, religio
+      
+       
+        
+    }//GEN-LAST:event_Modifica_selActionPerformed
+
+    private void ModificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificaActionPerformed
+
+        // TODO add your handling code here:
+        
+        boolean afegir = true;
+        int dip = -1; int edat = -1;
+        Errors.setText("");
+        if (campEdat1.getText().isEmpty() || campId1.getText().isEmpty() ||
+            campNom1.getText().isEmpty() || campPartit1.getText().isEmpty()
+            || campReligio1.getText().isEmpty() || campSexe1.getText().isEmpty()) {
+            //Errores.setText("Algun camp esta buit");
+            afegir &= false;
+            Errors.append("Algun camp esta buit");
+
+        }
+        if (! campEdat1.getText().isEmpty()) {
+            edat = test_String(campEdat1.getText());
+            if (edat < 18 || edat > 120) {
+                afegir &= false;
+                Errors.append("\n Edat ha de ser un enter positiu major de 18 i menor de 120");
+            }
+            else {
+                afegir &= true;
+            }
+        }
+        
+        if (! afegir) { // mostrar missatge error, no s'ha afegit
+            AvisError.setVisible(true);
+            AvisError.pack();
+        }
+        else { // cal afegirlo i mostrar missatge OK
+
+            // afegir diputat al controlador
+            Vector<String> info = new Vector<String>(6);
+            info.add(campId1.getText());
+            info.add(campNom1.getText());
+            info.add(campEdat1.getText());
+            info.add(campSexe1.getText());
+            info.add(campPartit1.getText());
+            info.add(campReligio1.getText());
+            // ho posa a la fila d'on era
+            sobre_fila(info);
+            msg = new Missatge_basic(this, afegir);
+            // CRIDA A CONTROLADOR
+            msg.setMsg("Modificat correctament");
+            msg.setVisible(true);
+            msg.pack();
+            ModificaDip.setVisible(false);
+            cVP.modifica_diputat(info);
+            
+
+        }
+        
+    }//GEN-LAST:event_ModificaActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        ModificaDip.setVisible(false);
+    }//GEN-LAST:event_jButton7ActionPerformed
+    // guardar
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        cVP.guarda_diputats_fitxer("F:/PROP/diputados");
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        cVP.carrega_diputats_fitxer("F:/PROP/diputados");
+    }//GEN-LAST:event_jButton8ActionPerformed
+    
+    private void carregaDadesTaulaRelacions(Vector<Vector<String>> infos) {
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable2.getModel();
+        for (Vector<String> s: infos) {
+            System.out.println(s);
+            model.addRow(s);
+        }
+        
+    }
+    
+    private int getIdFromSelected(int r) {
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable1.getModel();
+        return Integer.parseInt((String)model.getValueAt(r, 0));
+    }
+    
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model;
+        model = (DefaultTableModel) jTable1.getModel();
+        int[] selectedRows = jTable1.getSelectedRows();
+        if (selectedRows.length == 2) {
+           if (!RelacioDiputats.isVisible()) {
+            Vector<Integer> inf = new Vector<>();
+            inf.add(getIdFromSelected(selectedRows[0]));
+            inf.add(getIdFromSelected(selectedRows[1]));
+            carregaDadesTaulaRelacions(cVP.getDiputats(inf));
+            DefaultTableModel mod;
+            mod = (DefaultTableModel) jTable3.getModel();
+            mod.addRow(cVP.relacio_diputats(inf.get(0), inf.get(1)));
+            RelacioDiputats.setVisible(true);
+            RelacioDiputats.pack();
+           }
+            
+            
+        }
+        else {
+            Missatge_basic_errors mb = new Missatge_basic_errors(this, true);
+            mb.append_error("Has de seleccionar 2");
+            mb.setVisible(true);
+            mb.pack();
+        }
+       
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jTable2InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable2InputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2InputMethodTextChanged
+    
+    private void eliminarTotAssociats() {
+        DefaultTableModel mod = (DefaultTableModel) jTable2.getModel();
+        for (int i = mod.getRowCount() - 1; i >= 0; --i) {
+            mod.removeRow(i);
+        }
+        DefaultTableModel mod3 = (DefaultTableModel) jTable3.getModel();
+        mod3.removeRow(0);
+     }
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        eliminarTotAssociats();
+        RelacioDiputats.setVisible(false);
+        
+    }//GEN-LAST:event_jButton11ActionPerformed
+   
+    // MODIFICAR
+    //private void modifica
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AfegeixNou;
+    private javax.swing.JDialog AfegirDip;
+    private javax.swing.JDialog AvisError;
+    private javax.swing.JTextArea Errors;
+    private javax.swing.JDialog InfoSuccess;
+    private javax.swing.JButton Modifica;
+    private javax.swing.JDialog ModificaDip;
+    private javax.swing.JButton Modifica_sel;
+    private javax.swing.JDialog RelacioDiputats;
+    private javax.swing.JTextField campEdat;
+    private javax.swing.JTextField campEdat1;
+    private javax.swing.JTextField campId;
+    private javax.swing.JTextField campId1;
+    private javax.swing.JTextField campNom;
+    private javax.swing.JTextField campNom1;
+    private javax.swing.JTextField campPartit;
+    private javax.swing.JTextField campPartit1;
+    private javax.swing.JTextField campReligio;
+    private javax.swing.JTextField campReligio1;
+    private javax.swing.JTextField campSexe;
+    private javax.swing.JTextField campSexe1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
+    
+    // VARIABLES DECLARADES PEL PROGRAMADOR
+ 
+  
+
 }

@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import org.jfree.ui.RefineryUtilities;
 
 
@@ -33,8 +34,8 @@ public class VistaEstadistica extends javax.swing.JFrame {
         img = null;
         try { //C:\\Users\\dani__000\\Desktop\\PRPROP\\dominio\\
             img = ImageIO.read(new File("grafico2.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(VistaEstadistica.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,e.getMessage());
         }
         initComponents();
         RefineryUtilities.centerFrameOnScreen(this);
