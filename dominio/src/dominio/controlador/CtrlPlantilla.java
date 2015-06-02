@@ -43,6 +43,13 @@ public class CtrlPlantilla {
         else if (nom.isEmpty()) throw new Exception("El nom no pot estar buit.");
         else if (listaPlantillas.contains(nom)) throw new Exception("Ja existeix la plantilla "+ nom + ".");
         else {
+            boolean mal = false;
+            for (int i = 0; (i < 9) && !mal; i++){
+                if (lPonds[i] < 0){
+                    mal = true;
+                    throw new Exception("Les ponderacions no poden ser negatives");
+                }
+            }
             listaPlantillas.add(nom);
             mapPlantillas.put(nom, new Plantilla(nom, lPonds));
         }
@@ -99,7 +106,7 @@ public class CtrlPlantilla {
             while (l2.hasNext()){
                 pond[n] = Integer.valueOf((String) l2.next());
                 n++;
-            }
+            } 
             //ponder(pond);
             map.put(nom, new Plantilla(nom,pond));
         }
@@ -143,6 +150,13 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            boolean mal = false;
+            for (int i = 0; (i < 9) && !mal; i++){
+                if (listaPond[i] < 0){
+                    mal = true;
+                    throw new Exception("Les ponderacions no poden ser negatives");
+                }
+            }
             Plantilla p = mapPlantillas.get(nom);
             p.modpVotacio(listaPond[0]);
             p.modpVotacioDif(listaPond[1]);
@@ -160,6 +174,8 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            if (p < 0) 
+                throw new Exception("Les ponderacions no poden ser negatives");
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpVotacio(p);
         }
@@ -169,6 +185,8 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            if (p < 0) 
+                throw new Exception("Les ponderacions no poden ser negatives");
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpVotacioDif(p);
         }
@@ -178,6 +196,8 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            if (p < 0) 
+                throw new Exception("Les ponderacions no poden ser negatives");
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpReunio(p);
         }
@@ -187,6 +207,8 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            if (p < 0) 
+                throw new Exception("Les ponderacions no poden ser negatives");
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpConf(p);
         }
@@ -196,6 +218,8 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            if (p < 0) 
+                throw new Exception("Les ponderacions no poden ser negatives");
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpDinar(p);
         }
@@ -205,6 +229,8 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            if (p < 0) 
+                throw new Exception("Les ponderacions no poden ser negatives");
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpLleure(p);
         }
@@ -214,6 +240,8 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            if (p < 0) 
+                throw new Exception("Les ponderacions no poden ser negatives");
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpPartit(p);
         }
@@ -223,6 +251,8 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            if (p < 0) 
+                throw new Exception("Les ponderacions no poden ser negatives");
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpEdat(p);
         }
@@ -232,6 +262,8 @@ public class CtrlPlantilla {
         if ("default".equalsIgnoreCase(nom)) throw new Exception("No se puede modificar la plantilla default");
         else if (!mapPlantillas.containsKey(nom)) throw new Exception("La plantilla no existe");
         else {
+            if (p < 0) 
+                throw new Exception("Les ponderacions no poden ser negatives");
             Plantilla pl = mapPlantillas.get(nom);
             pl.modpReligio(p);
         }
